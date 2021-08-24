@@ -1,0 +1,45 @@
+#!/usr/bin/env python3
+
+# This should be run every friday, but I don't use it currently. someday.
+
+from typing import Tuple
+from datetime import date
+import sys
+from os.path import expanduser
+
+HOMEDIR = expanduser("~")
+cur_year = date.today().isocalendar().year
+cur_week = date.today().isocalendar().week
+
+
+log = ""
+with open(f"{HOMEDIR}/notes/curative/captains-log.md") as f:
+    log = f.read()
+
+sunday_back_to_monday = [
+    date.fromisocalendar(cur_year, cur_week, day).strftime("%Y-%m-%d")
+    for day in reversed(range(1, 8))
+]
+
+split_markers = [day for day in sunday_back_to_monday if day in log]
+
+log_by_day = []
+split_logs = log.split("\n# ")
+for day in split_markers:
+    for daylog in split_logs:
+        if day in daylog:
+            log_by_day.append((day, "## TL" + daylog.split("\n## TL")[1]))
+            break
+
+wlog_base = ""
+for day, log in reversed(log_by_day):
+    wlog_base += f"{day}\n{log}\n"
+
+wlog = wlog_base.replace("TODO", "Done").replace("\n## ", "\n").replace("TL;DR;", "")
+wlog = "\n".join([line for line in wlog.splitlines() if line and "- [ ]" not in line])
+
+with open(
+    f"{HOMEDIR}/notes/curative/weekly-reports/week-{date.today().strftime('%V-of-%Y')}.md",
+    "w",
+) as f:
+    f.write(wlog)

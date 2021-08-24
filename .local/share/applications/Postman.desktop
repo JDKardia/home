@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Terminal=false
+Name=Postman
+Icon=/opt/Postman/app/resources/app/assets/icon.png
+GenericName=REST Endpoint Caller
+Categories=Utility;
+Keywords=Curl;REST;Get;Post;
+Exec=/opt/Postman/Postman

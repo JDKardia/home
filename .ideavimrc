@@ -1,0 +1,34 @@
+" The Essentials
+"""""""""""""""""""""""""""""""""""""""""""
+" The Sane Escape
+:imap jk <Esc>
+:imap kj <Esc>
+
+set number relativenumber      " Set the perfect line numbers
+set mouse=a          " enable mouse support in all modes
+set wildmode=longest:full,full " Enable vim command completion
+set whichwrap+=<,>,h,l,[,]     " allow cursor to wrap lines
+let mapleader=","    " Set a Sensible Leader
+set magic            " For regular expressions turn magic on
+set ignorecase       " Ignore case when searching
+set showmatch        " Show matching brackets when indicator is over them
+set mat=2            " tenths of a second to blink when matching brackets
+set scrolloff=7      " Set sane scrolloff
+set autoindent       " preserve current line's indent
+set smartindent      " smartly add indents when necessary
+set expandtab        " Use spaces instead of tabs
+set shiftwidth=2     " 1 tab == 2 spaces
+set tabstop=2        " 1 tab == 2 spaces
+set ffs=unix,dos,mac " Use Unix as the standard file type
+set encoding=utf8    " cuz duh
+set timeoutlen=500   " ms to wait for a mapped sequence to complete.
+set noerrorbells     " disable errorbells
+set novisualbell     " disable visual flash from bell
+set nrformats+=alpha " allows <CTRL+A> to increment alpha characters too.
+set t_vb=
+set clipboard+=unnamed  " use the system clipboard
+
+" Ideavim specific plugins
+"""""""""""""""""""""""""""""""""""""""""""
+set commentary
+set surround

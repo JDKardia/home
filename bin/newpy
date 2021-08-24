@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+
+cat <<EOM >>${1:-"placeholder.py"}
+#!/usr/bin/env python3
+
+EOM

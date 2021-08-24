@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+if [ $# -gt 0 ]; then
+  ENTERED_NAME="$@"
+  echo "${ENTERED_NAME%.*}" |    # the '%.*' removes file extensions
+    tr '[:upper:]' '[:lower:]' | # homogenize names
+    tr ' ' '-' |                 # spaces to hyphens for cd-ability
+    sed 's/--/-/g'               # remove accidental doubles
+fi

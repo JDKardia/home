@@ -1,0 +1,21 @@
+[submodule "OthersCode/i3-swallow"]
+	path = OthersCode/i3-swallow
+	url = git@github.com:jamesofarrell/i3-swallow
+[submodule "OthersCode/logiops"]
+	path = OthersCode/logiops
+	url = git@github.com:PixlOne/logiops.git
+[submodule "OthersCode/gitwatch"]
+	path = OthersCode/gitwatch
+	url = git@github.com:gitwatch/gitwatch.git
+[submodule "OthersCode/deezer"]
+	path = OthersCode/deezer
+	url = git@github.com:siphomateke/deezer
+[submodule "OthersCode/nerd-fonts"]
+	path = OthersCode/nerd-fonts
+	url = git@github.com:ryanoasis/nerd-fonts
+[submodule "OthersCode/nvimpager"]
+	path = OthersCode/nvimpager
+	url = git@github.com:lucc/nvimpager
+[submodule "notes"]
+	path = notes
+	url = git@github.com:jdkardia/notes.git

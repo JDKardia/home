@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+asdf=${1:-'hello'}
+sdfg=${2:-$1}
+
+echo "$sdfg"

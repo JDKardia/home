@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+
+if [ $# -gt 0 ]; then
+  ENTERED_NAME="$@"
+  FILE_NAME="$(~/bin/to-note-name "$ENTERED_NAME.*")"
+
+  if [[ -f "$HOME/notes/west-marches/$FILE_NAME.md" ]]; then
+    # If the note exists, lets open it up to edit it
+    nvim "$HOME/notes/west-marches/$FILE_NAME.md"
+    exit 0
+  else
+    # If the note does NOT exist, lets initialize it.
+    nvim -c "Zet $ENTERED_NAME" -- "$HOME/notes/west-marches/$FILE_NAME.md"
+  fi
+fi

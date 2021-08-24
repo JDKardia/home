@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+
+if [[ -f "$HOME/.gitignore" ]]; then
+  mv "$HOME/.gitignore" "$HOME/.toggledgitignore"
+  mv "$HOME/.git" "$HOME/.toggledgit"
+elif [[ -f "$HOME/.toggledgitignore" ]]; then
+  mv "$HOME/.toggledgitignore" "$HOME/.gitignore"
+  mv "$HOME/.toggledgit" "$HOME/.git"
+fi

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cd "$HOME/notes" # go to provided folder or noop
+bash ff

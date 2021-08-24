@@ -1,0 +1,5 @@
+#compdef _wmnote wmnote
+_svnote(){
+    _path_files -W /home/kardia/notes/scum-and-villainy
+}
+compdef _svnote svnote

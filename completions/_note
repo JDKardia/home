@@ -1,0 +1,5 @@
+#compdef _note note
+_note(){
+    _path_files -W /home/kardia/notes
+}
+compdef _note note

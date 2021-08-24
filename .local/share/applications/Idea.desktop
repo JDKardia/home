@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Terminal=false
+Name=Idea
+Icon=/opt/Intellij/bin/idea.svg
+GenericName=Scala IDE
+Comment=An IDE by Jetbrains
+Categories=Utility;TextEditor;
+MimeType=text/english;text/plain;text/x-makefile;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-csrc;text/x-java;text/x-moc;text/x-pascal;text/x-tcl;text/x-tex;application/x-shellscript;text/x-c;text/x-c++;
+Categories=TextEditor;IDE;
+Keywords=Text;Editor;IDE;Scala;
+Exec=env GOOGLE_APPLICATION_CREDENTIALS='/home/kardia/.gcp/build-240615-afa84fe6be7a.json' /opt/Intellij/bin/idea.sh

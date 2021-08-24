@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+gcpfile(){ #completeme: gcp data collector files into json
+cat $1 | gzip -d | sed '1,3d'
+}
+
+"$@"

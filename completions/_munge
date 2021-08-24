@@ -1,0 +1,9 @@
+#compdef _munge munge
+
+_munge() {
+  local -a subcmds
+  IFS=$'\n' subcmds=($(cat ~/bin/munge | grep 'completeme'| sed 's/function //g; s/\(.*\)().*{.*completeme: \(.*\)/\1:\2/g;'))
+  _describe 'munge' subcmds
+}
+
+compdef _munge munge
