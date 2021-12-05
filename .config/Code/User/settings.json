@@ -1,6 +1,12 @@
 {
+  "[Markdown]": {
+    "files.trimTrailingWhitespace": false
+  },
   "[groovy]": {
     "editor.tabSize": 4
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -16,14 +22,7 @@
   "[markdown]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "[Markdown]": {
-    "files.trimTrailingWhitespace": false
-  },
   "[python]": {
-    "editor.codeActionsOnSave": {
-      "source.fixAll": true,
-      "source.organizeImports": true
-    },
     "editor.defaultFormatter": "ms-python.python",
     "editor.insertSpaces": true,
     "editor.tabSize": 4
@@ -46,26 +45,6 @@
     },
     "editor.tabSize": 2
   },
-  "autoflake.path": "/home/kardia/.pyenv/shims/autoflake",
-  "bracket-pair-colorizer-2.colors": [
-    "#aea8d3",
-    "#e26a6a",
-    "#ffd07a",
-    "#fc6399",
-    "#ffecdb",
-    "#6495ed",
-    "#00e0e0",
-    "#f4d03f",
-    "#b8860b"
-  ],
-  "bracket-pair-colorizer-2.scopeLineCSS": [
-    "borderStyle : dashed",
-    "borderWidth : 2px",
-    "borderColor : {color}",
-    "opacity: 0.5"
-  ],
-  "bracket-pair-colorizer-2.showBracketsInGutter": true,
-  "bracket-pair-colorizer-2.showBracketsInRuler": true,
   "colorInfo.languages": [
     {
       "colors": "css",
@@ -88,17 +67,23 @@
       "selector": "jsonc"
     }
   ],
+  "prettier.requireConfig": true,
   "editor.accessibilitySupport": "off",
+  "editor.bracketPairColorization.enabled": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.fixAll": true,
+    "source.organizeImports": true
   },
   "editor.cursorSurroundingLines": 10,
   "editor.fontFamily": "FiraCode Nerd Font Mono",
   "editor.fontLigatures": true,
   "editor.fontSize": 14,
   "editor.formatOnPaste": false,
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
+  "editor.formatOnSaveMode": "modifications",
   "editor.formatOnType": false,
+  "editor.guides.bracketPairs": true,
+  "editor.guides.bracketPairsHorizontal": true,
   "editor.insertSpaces": true,
   "editor.largeFileOptimizations": true,
   "editor.lineHeight": 16,
@@ -106,36 +91,49 @@
   "editor.multiCursorModifier": "alt",
   "editor.renderLineHighlight": "all",
   "editor.renderWhitespace": "boundary",
-  "editor.rulers": [88],
+  "editor.rulers": [
+    88
+  ],
   "editor.suggestSelection": "first",
   "editor.tabSize": 2,
   "editor.tokenColorCustomizations": {
     "textMateRules": [
       {
-        "scope": ["comment", "punctuation.definition.comment"],
+        "scope": [
+          "comment",
+          "punctuation.definition.comment"
+        ],
         "settings": {
           "fontStyle": "bold"
         }
       }
     ]
   },
-  "emmet.excludeLanguages": ["markdown", "typescriptreact", "typescript"],
+  "emmet.excludeLanguages": [
+    "markdown",
+    "typescriptreact",
+    "typescript"
+  ],
   "eslint.enable": true,
+  "eslint.validate": [
+    "javascript",
+    "typescript"
+  ],
   "explorer.confirmDelete": false,
   "files.associations": {
     "*.txt": "shellscript",
+    "*Jenkinsfile*": "groovy",
     "*bashrc": "shellscript",
     "*jenkinsfile*": "groovy",
-    "*Jenkinsfile*": "groovy",
     "*zshrc": "shellscript"
   },
   "files.autoSave": "afterDelay",
   "files.autoSaveDelay": 10000,
   "files.defaultLanguage": "json",
   "files.exclude": {
-    "**/__pycache__": true,
-    "**/.classpath": true,
+    "**/*.map": true,
     "**/.DS_Store": true,
+    "**/.classpath": true,
     "**/.factorypath": true,
     "**/.git": true,
     "**/.hg": true,
@@ -144,8 +142,8 @@
     "**/.settings": true,
     "**/.svn": true,
     "**/.vscode": true,
-    "**/*.map": true,
     "**/CVS": true,
+    "**/__pycache__": true,
     "**/env/*": true,
     "**/envkins/*": true,
     "**/envune/*": true,
@@ -153,6 +151,11 @@
   },
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
+  "files.watcherExclude": {
+    "**/.ammonite": true,
+    "**/.bloop": true,
+    "**/.metals": true
+  },
   "git.autofetch": true,
   "git.confirmSync": false,
   "git.path": "git",
@@ -220,12 +223,14 @@
   "peacock.surpriseMeFromFavoritesOnly": true,
   "peacock.surpriseMeOnStartup": true,
   "python.analysis.diagnosticMode": "openFilesOnly",
-  "python.analysis.disabled": ["unresolved-import"],
   "python.formatting.provider": "black",
   "python.languageServer": "Pylance",
   "python.linting.enabled": true,
   "python.linting.flake8Enabled": true,
-  "python.linting.ignorePatterns": [".vscode/*.py", "**/site-packages/**/*.py"],
+  "python.linting.ignorePatterns": [
+    ".vscode/*.py",
+    "**/site-packages/**/*.py"
+  ],
   "python.linting.mypyEnabled": true,
   "python.linting.pylintEnabled": false,
   "search.exclude": {
@@ -234,29 +239,41 @@
     "dist": true,
     "jspm_packages": true
   },
-  "sql-formatter.uppercase": true,
   "terminal.external.osxExec": "kitty",
+  "vim.insertModeKeyBindings": [
+    {
+      "after": [
+        "<Esc>"
+      ],
+      "before": [
+        "j",
+        "k"
+      ]
+    },
+    {
+      "after": [
+        "<Esc>"
+      ],
+      "before": [
+        "k",
+        "j"
+      ]
+    }
+  ],
+  // "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
+  // "vscode-neovim.neovimInitVimPaths.linux": "/home/kardia/.config/nvim/init.vim",
+  "window.zoomLevel": 1,
   "workbench.colorCustomizations": {
     "editor.selectionBackground": "#ff00aa3d",
     "editor.selectionHighlightBackground": "#ff00aa3d",
     "editorRuler.foreground": "#2ee2fa33"
   },
   "workbench.colorTheme": "Gruvbox Dark Hard",
-  "workbench.settings.editor": "json",
-  "workbench.settings.enableNaturalLanguageSearch": false,
-  "workbench.settings.useSplitJSON": true,
-  "workbench.sideBar.location": "right",
   "workbench.editorAssociations": {
     "*.ipynb": "jupyter.notebook.ipynb"
   },
-  "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
-  "vscode-neovim.neovimInitVimPaths.linux": "/home/kardia/.config/nvim/init.vim",
-  "window.zoomLevel": 1,
-  "files.watcherExclude": {
-    "**/.bloop": true,
-    "**/.metals": true,
-    "**/.ammonite": true
-  },
-  "bracket-pair-colorizer-2.showHorizontalScopeLine": true,
-  "bracket-pair-colorizer-2.showVerticalScopeLine": true
+  "workbench.settings.editor": "json",
+  "workbench.settings.enableNaturalLanguageSearch": false,
+  "workbench.settings.useSplitJSON": true,
+  "workbench.sideBar.location": "right"
 }

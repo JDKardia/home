@@ -1,7 +1,0 @@
-#compdef _cnote cnote
-
-_FUCKKSKSKSKS(){
-}
-function _cnote {
-  _path_files -W /home/kardia/notes/cognitops
-}

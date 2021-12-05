@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+
+#my personal repos to pull
+repos=(
+  akashic
+  genlicense
+  git-conceal
+  home
+  much-to-do-about-nothing
+  notes
+  playground
+  portportport
+  pshtman
+  scry
+  testing-examples
+  )
+
+for repo in "${repos[@]}"; do 
+  (git clone "git@github.com:JDKardia/$repo.git" >/dev/null 2>&1 ; echo "finished cloning $repo" ) &
+done
+wait
+echo "done cloning your repos"

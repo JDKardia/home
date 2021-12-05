@@ -1,3 +1,4 @@
 # set theme
---theme="gruvbox-dark"
-
+--theme='gruvbox-dark'
+--paging=never
+--tabs=2

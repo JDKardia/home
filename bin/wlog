@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-set -euo pipefail
-IFS=$'\n\t'
-
-WEEKOFYEAR=$(date "+%V-of-%Y")
-nvim "$HOME/notes/curative/weekly-reports/week-$WEEKOFYEAR.md"

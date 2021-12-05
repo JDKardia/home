@@ -1,2 +1,2 @@
 ## For Profiling
-zprof
+zprof | head

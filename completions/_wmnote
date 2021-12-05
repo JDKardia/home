@@ -1,5 +1,0 @@
-#compdef _wmnote wmnote
-_wmnote(){
-    _path_files -W /home/kardia/notes/west-marches
-}
-compdef _wmnote wmnote

@@ -1,0 +1,6 @@
+#compdef sn
+. "$HOME/lib/bash/notes/_note"
+_sn(){
+  note::completion "$HOME/notes/stripe"
+}
+_sn

@@ -1,0 +1,70 @@
+""""""""""""""""""""
+" Joe's Minimum Vim Config "
+""""""""""""""""""""
+" The Sane Escape
+:imap jk <Esc>
+:imap kj <Esc>
+
+nnoremap j gj
+nnoremap gj j
+nnoremap k gk
+nnoremap gk k
+
+command! Vimrc :vs $MYVIMRC " open vimrc
+
+set wildmode=longest:full,full " Enable vim command completion
+set whichwrap+=<,>,h,l,[,]     " allow cursor to wrap lines
+let mapleader=" "     " Set a Sensible Leader
+set magic             " For regular expressions turn magic on
+set ignorecase        " Ignore case when searching
+set showmatch         " Show matching brackets when indicator is over them
+set mat=2             " tenths of a second to blink when matching brackets
+set scrolloff=5       " Set sane scrolloff
+set foldmethod=marker " use {{{ to }}} based folding
+set autoindent        " preserve current line's indent
+set smartindent       " smartly add indents when necessary
+set colorcolumn=88    " black formatter recommended line length
+set expandtab         " Use spaces instead of tabs
+set shiftwidth=2      " 1 tab == 2 spaces
+set tabstop=2         " 1 tab == 2 spaces
+set ffs=unix,mac,dos  " Use Unix as the standard file type
+set encoding=utf8     " cuz duh
+set timeoutlen=300    " ms to wait for a mapped sequence to complete.
+set noerrorbells      " disable errorbells
+set novisualbell      " disable visual flash from bell
+set termguicolors " 24 bit color
+set t_vb=
+
+" look for these suffixes when given filename without an extension
+set suffixesadd=.md,.py,.sh,.js
+
+
+
+
+" sane yaml shit
+autocmd FileType yaml,yml setlocal ts=2 sts=2 sw=2 expandtab indentkeys-=0# indentkeys-=<:>
+
+" move a line of text with ALT+[jk] or META+[jk] on mac
+nnoremap <A-j> :m .+1<cr>==
+nnoremap <A-k> :m .-2<cr>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+<cr>gv=gv
+vnoremap <A-k> :m '<-2<cr>gv=gv
+
+" Typos suck
+command! Wq wq
+command! Q q
+
+" sometimes we need the system clipboard
+noremap <Leader>y "+y
+noremap <Leader>p "+p
+noremap <Leader>Y "*y
+noremap <Leader>P "*p
+vnoremap <Leader>y "+y
+vnoremap <Leader>p "+p
+vnoremap <Leader>Y "*y
+vnoremap <Leader>P "*p
+
+inoreabbrev .\ λ
+
