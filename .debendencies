@@ -70,7 +70,6 @@ plantuml
 podman
 postgresql
 postgresql-autodoc
-pulseaudio-modules-bt
 python2
 python3
 python3-pip

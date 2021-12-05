@@ -17,7 +17,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug '907th/vim-auto-save'
 Plug 'SirVer/ultisnips'
 Plug 'fladson/vim-kitty'
-Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+" Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug 'honza/vim-snippets'
 Plug 'hrsh7th/nvim-compe'
 Plug 'mhinz/vim-signify'
@@ -33,10 +33,12 @@ Plug 'p00f/nvim-ts-rainbow'
 Plug 'preservim/nerdtree' |  Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'prettier/vim-prettier'
 Plug 'sbdchd/neoformat'
-Plug 'scalameta/nvim-metals'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
+Plug 'kovisoft/slimv'
+Plug 'ziglang/zig.vim'
+Plug 'williamboman/nvim-lsp-installer'
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
 
@@ -177,11 +179,6 @@ au BufRead,BufNewFile *.sc set filetype=scala
 " PLUGIN SETTINGS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" auto-pairs
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:AutoPairsMapSpace = 0
-"""
-
 " Telescope Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
@@ -216,6 +213,9 @@ let g:UltiSnipsJumpBackwardTrigger="<Nop>"
 let g:UltiSnipsMappingsToIgnore=["<tab>", "<S-tab>"]
 
 lua << LSPCONF
+local lsp_installer = require("nvim-lsp-installer")
+local lspconf = require("lspconfig")
+
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.completion.completionItem.resolveSupport = {
@@ -257,36 +257,32 @@ local on_attach = function(client, bufnr)
   buf_set_keymap("n", "<leader><leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 end
 
-local lspconf = require'lspconfig'
 
 
 -- Use a loop to call 'setup' on multiple servers
 
 local servers = {
   "bashls",
+  "clangd",
+  "cmake",
   "cssls",
   "dockerls",
   "dotls",
+  "elixirls",
+  "eslint",
   "html",
   "jsonls",
   "pyright",
+  "sqlls",
   "tsserver",
   "vimls",
-  "yamlls"
+  "yamlls",
+  "zls"
 }
 
 for _, lsp in ipairs(servers) do
   lspconf[lsp].setup { on_attach=on_attach, capabilities=capabilities }
 end
-
-metals_config=require'metals'.bare_config
-metals_config.init_options.statusBarProvider = 'on'
-metals_config.on_attach = function() on_attach(); end
-metals_config.capabilities = capabilities
-vim.cmd [[augroup lsp]]
-vim.cmd [[au!]]
-vim.cmd [[au FileType scala,sbt lua require("metals").initialize_or_attach(metals_config);]]
-vim.cmd [[augroup end]]
 
 require'compe'.setup {
   enabled = true;
@@ -362,15 +358,6 @@ LSPCONF
 inoremap <silent><expr> <C-Space> compe#complete()
 inoremap <silent><expr> <CR>      compe#confirm('<CR>')
 inoremap <silent><expr> <C-e>     compe#close('<C-e>')
-
-" nvim-metals Configs
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  if has('nvim-0.5')
-    augroup lsp
-      au!
-      au FileType scala,sbt lua require('metals').initialize_or_attach({})
-    augroup end
-  endif
 
 " NERDTree Configs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
