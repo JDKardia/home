@@ -5,8 +5,8 @@ export FPATH=~/completions:$FPATH
 export VISUAL=$(which nvim)
 export FORCE_COLOR=true # for yarn workspace colors
 export CLICOLOR=YES
-#export PAGER='nvimpager'
-export PAGER='less'
+export PAGER='nvimpager'
+#export PAGER='less'
 export FZF_COMPLETION_TRIGGER='~~'
 export GOOGLE_APPLICATION_CREDENTIALS='/home/kardia/.gcp/build-240615-afa84fe6be7a.json'
 export DOCKERHOST='localhost'
@@ -32,6 +32,7 @@ HISTFILE=~/.zhistory
 HISTSIZE=1000000
 SAVEHIST=1000000
 setopt EXTENDED_HISTORY       # save timestamp and elapsed time to history
+setopt HIST_IGNORE_DUPS
 setopt HIST_EXPIRE_DUPS_FIRST # trim duplicate commands first
 setopt SHARE_HISTORY          # allows terminals to share their history
 

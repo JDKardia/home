@@ -5,7 +5,7 @@ IFS=$'\n\t'
 while clipnotify; do
   entries=($(xclip -selection clipboard -o | egrep '^entity|^.*?{') )
   for entry in "${entries[@]}"; do
-    echo "$entry" | sed -E 's/.*\| \{/{/g; s/(.+)(\}.*)$/\1}/g;'|jq
+    echo "$entry" | sed -E 's/.*\| \{/{/g;'|jq
   done
   echo '-----------------------------------------------'
 done

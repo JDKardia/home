@@ -43,8 +43,8 @@
 # Meta Key - Alt key is Mod1, and Windows key is Mod4
 set_from_resource $mod  i3-wm.mod Mod4
 set_from_resource $alt  i3-wm.alt Mod1
- 
-set_from_resource $i3-wm.binding. i3-wm.binding. 
+
+set_from_resource $i3-wm.binding. i3-wm.binding.
 
 ###############################################################################
 # Workspace Names
@@ -66,8 +66,8 @@ set_from_resource $ws12 i3-wm.workspace.12.name "12"
 
 
 ###############################################################################
-# Workspace Outputs 
-# Which outputs go Where.  
+# Workspace Outputs
+# Which outputs go Where.
 ###############################################################################
 # for double monitor
 # workspace 1  output DP-0 eDP-1
@@ -83,18 +83,18 @@ set_from_resource $ws12 i3-wm.workspace.12.name "12"
 # workspace 11 output DP-1 DP-3 eDP-1
 # workspace 12 output DP-1 DP-3 eDP-1
 
-workspace 01 output DP-1 eDP-1-1 DP-1-0
-workspace 02 output DP-1 eDP-1-1 DP-1-0
-workspace 03 output DP-1 eDP-1-1 DP-1-0
-workspace 04 output DP-1 eDP-1-1 DP-1-0
-workspace 05 output DP-1 eDP-1-1 DP-1-0
-workspace 06 output DP-1 eDP-1-1 DP-1-0
-workspace 07 output DP-0 DP-1-1 
-workspace 08 output DP-0 DP-1-1 
-workspace 09 output DP-0 DP-1-1 
-workspace 10 output DP-0 DP-1-1 
-workspace 11 output DP-0 DP-1-1 
-workspace 12 output DP-0 DP-1-1 
+workspace 01 output eDP-1-1  HDMI-1  DP-1-0
+workspace 02 output eDP-1-1  HDMI-1  DP-1-0
+workspace 03 output eDP-1-1  HDMI-1  DP-1-0
+workspace 04 output eDP-1-1  HDMI-1  DP-1-0
+workspace 05 output eDP-1-1  HDMI-1  DP-1-0
+workspace 06 output eDP-1-1  HDMI-1  DP-1-0
+workspace 07 output DP-0 DP-1-1 DP-1 HDMI-0
+workspace 08 output DP-0 DP-1-1 DP-1 HDMI-0
+workspace 09 output DP-0 DP-1-1 DP-1 HDMI-0
+workspace 10 output DP-0 DP-1-1 DP-1 HDMI-0
+workspace 11 output DP-0 DP-1-1 DP-1 HDMI-0
+workspace 12 output DP-0 DP-1-1 DP-1 HDMI-0
 # moving workspaces between monitors
 
 
@@ -221,7 +221,7 @@ set_from_resource $i3-wm.binding.ws_next_on_output2 i3-wm.binding.ws_next_on_out
 bindsym $mod+$i3-wm.binding.ws_next_on_output2 workspace next_on_output
 
 ## Navigate // Previous Workspace // <><Shift> Tab ##
-set_from_resource $i3-wm.binding.ws_prev i3-wm.binding.ws_prev Shift+Tab 
+set_from_resource $i3-wm.binding.ws_prev i3-wm.binding.ws_prev Shift+Tab
 bindsym $mod+$i3-wm.binding.ws_prev workspace prev
 
 ## Navigate // Previous Workspace // <><Alt> ← ##
@@ -240,8 +240,8 @@ bindsym $mod+$i3-wm.binding.ws_prev_on_output2 workspace prev_on_output
 set_from_resource $i3-wm.binding.next_free i3-wm.binding.next_free grave
 bindsym $mod+$i3-wm.binding.next_free exec --no-startup-id /usr/share/i3xrocks/next-workspace --startnum 1
 
-## Navigate // Scratchpad // <><Ctrl> a ##
-set_from_resource $i3-wm.binding.scratchpad i3-wm.binding.scratchpad Ctrl+a
+## Navigate // Scratchpad // <> \ ##
+set_from_resource $i3-wm.binding.scratchpad i3-wm.binding.scratchpad backslash
 bindsym $mod+$i3-wm.binding.scratchpad scratchpad show
 
 ###############################################################################
@@ -293,15 +293,15 @@ set_from_resource $i3-wm.binding.orientation_toggle i3-wm.binding.orientation_to
 bindsym $mod+$i3-wm.binding.orientation_toggle split toggle
 
 ## Modify // Window Fullscreen Toggle // <> f ##
-set_from_resource $i3-wm.binding.fullscreen_toggle i3-wm.binding.fullscreen_toggle f 
+set_from_resource $i3-wm.binding.fullscreen_toggle i3-wm.binding.fullscreen_toggle f
 bindsym $mod+$i3-wm.binding.fullscreen_toggle fullscreen toggle
 
 ## Modify // Window Floating Toggle // <><Shift> f ##
 set_from_resource $i3-wm.binding.float_toggle i3-wm.binding.float_toggle Shift+f
 bindsym $mod+Shift+$i3-wm.binding.float_toggle floating toggle
 
-## Modify // Move to Scratchpad // <><Ctrl> m ##
-set_from_resource $i3-wm.binding.move_scratchpad i3-wm.binding.move_scratchpad Ctrl+m
+## Modify // Move to Scratchpad // <><Shift> \ ##
+set_from_resource $i3-wm.binding.move_scratchpad i3-wm.binding.move_scratchpad Shift+backslash
 bindsym $mod+$i3-wm.binding.move_scratchpad move to scratchpad
 
 ## Modify // Tile/Float Focus Toggle // <><Shift> t ##
@@ -394,7 +394,7 @@ set_from_resource $i3-wm.program.shutdown i3-wm.program.shutdown /usr/bin/gnome-
 bindsym $mod+$i3-wm.binding.shutdown exec $i3-wm.program.shutdown
 
 ## Session // Lock Screen // <> Escape ##
-set_from_resource $i3-wm.binding.lock i3-wm.binding.lock Escape 
+set_from_resource $i3-wm.binding.lock i3-wm.binding.lock Escape
 set_from_resource $i3-wm.program.lock i3-wm.program.lock dbus-send --type=method_call --dest=org.gnome.ScreenSaver /org/gnome/ScreenSaver org.gnome.ScreenSaver.Lock
 bindsym $mod+$i3-wm.binding.lock exec $i3-wm.program.lock
 
@@ -408,7 +408,7 @@ bindsym $mod+$i3-wm.binding.sleep exec $i3-wm.program.sleep
 ###############################################################################
 
 ### Modify // Settings // <> c ##
-#set_from_resource $i3-wm.binding.settings i3-wm.binding.settings c 
+#set_from_resource $i3-wm.binding.settings i3-wm.binding.settings c
 #set_from_resource $i3-wm.program.settings i3-wm.program.settings gnome-control-center --class=floating_window
 #bindsym $mod+$i3-wm.binding.settings exec $i3-wm.program.settings
 
@@ -423,7 +423,7 @@ set_from_resource $i3-wm.program.wifi i3-wm.program.wifi gnome-control-center --
 bindsym $mod+$i3-wm.binding.wifi exec $i3-wm.program.wifi
 
 ## Modify // Bluetooth Settings // <> b ##
-set_from_resource $i3-wm.binding.bluetooth i3-wm.binding.bluetooth b 
+set_from_resource $i3-wm.binding.bluetooth i3-wm.binding.bluetooth b
 set_from_resource $i3-wm.program.bluetooth i3-wm.program.bluetooth gnome-control-center --class=floating_window bluetooth
 bindsym $mod+$i3-wm.binding.bluetooth exec $i3-wm.program.bluetooth
 
@@ -443,7 +443,7 @@ bindsym $mod+$i3-wm.binding.notification_ui exec $i3-wm.program.notification_ui
 
 # i3-snapshot for load/save current layout
 ## Modify // Save Window Layout // <> , ##
-set_from_resource $i3-wm.binding.save_layout i3-wm.binding.save_layout comma 
+set_from_resource $i3-wm.binding.save_layout i3-wm.binding.save_layout comma
 bindsym $mod+$i3-wm.binding.save_layout  exec /usr/bin/i3-snapshot -o > /tmp/i3-snapshot
 ## Modify // Load Window Layout // <> . ##
 set_from_resource $i3-wm.binding.load_layout i3-wm.binding.load_layout period

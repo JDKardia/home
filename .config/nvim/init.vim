@@ -116,10 +116,12 @@ autocmd FileType yaml,yml setlocal ts=2 sts=2 sw=2 expandtab indentkeys-=0# inde
 let noteroot="/home/kardia/notes"
 
 " move a line of text with ALT+[jk] or META+[jk] on mac
-nmap <M-Down> mz:m+<cr>`z:
-nmap <M-Up> mz:m-2<cr>`z
-vmap <M-Down> :m'>+<cr>`<my`>mzgv`yo`z
-vmap <M-Up> :m'<-2<cr>`>my`<mzgv`yo`zi
+nnoremap <A-j> :m .+1<cr>==
+nnoremap <A-k> :m .-2<cr>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+<cr>gv=gv
+vnoremap <A-k> :m '<-2<cr>gv=gv
 
 " Typos suck
 command! Wq wq
@@ -141,18 +143,18 @@ inoreabbrev .\ λ
 
 "for inserting new logs into Captains Log
 function! NewLog()
-    let l:date = strftime("%Y-%m-%d")
-    call append(line('.'),["# " . date,"## Log","","## TL;DR;","- ","","## TODO:","- [ ]","",""])
-    normal! 2j
+  let l:date = strftime("%Y-%m-%d")
+  call append(line('.'),["# " . date,"## TODO:","- [ ]","",""])
+  normal! 2j
 endfunction
 command! NewLog call NewLog()
 nnoremap <leader>n :<C-U>call NewLog()<CR>
 
 "for inserting new time entries in a Captains log
 function! NewTime()
-    let l:date = strftime("%T%z")
-    call append(line('.'),["### " . date,""])
-    normal! 2j
+  let l:date = strftime("%T%z")
+  call append(line('.'),["### " . date,""])
+  normal! 2j
 endfunction
 command! NewTime call NewTime()
 nnoremap <leader>t :<C-U>call NewTime()<CR>
@@ -162,14 +164,10 @@ function! NewCheck()
 endfunction
 nnoremap <leader>c :<C-U>call NewCheck()<CR>
 
-" create init content for notes
-function! ZetStart(...)
-    " build title-case title
-    let l:title = substitute(join(a:000, " "), '\v<(a|an|the|is)@!\w+>', '\u&', 'g')
-    call append(0,["# " . title,"","","## tags","","- ",""])
-    normal! 5k
-endfunction
-command! -nargs=* Zet call ZetStart(<f-args>)
+" custom sql formatting, requires sql-formatter to be installed
+if executable("sql-formatter")
+  command! SqlFormat :%!sql-formatter -u | sed 's/ - > / -> /g; s/ \! = / \!= /g; s/ -> > / ->> /g; s/:: /::/g; s/ \#/\#/g'
+endif
 
 " set filetype to scala for .sc files (ammonite scripts)
 au BufRead,BufNewFile *.sc set filetype=scala

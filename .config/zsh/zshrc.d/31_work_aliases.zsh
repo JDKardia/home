@@ -14,7 +14,7 @@ cog-pull(){
     services=(kafka postgres redis keycloak)
   fi
   for service in "${services[@]}"; do
-    docker-compose -f "$COG_BASE_DIR/tools/$service/docker-compose.yml" pull &;
+    /usr/bin/docker-compose -f "$COG_BASE_DIR/tools/$service/docker-compose.yml" pull &;
   done
   wait
 }
@@ -24,7 +24,7 @@ cog-down(){
     services=(kafka postgres redis keycloak)
   fi
   for service in "${services[@]}"; do
-    docker-compose -f "$COG_BASE_DIR/tools/$service/docker-compose.yml" down &;
+    /usr/bin/docker-compose -f "$COG_BASE_DIR/tools/$service/docker-compose.yml" down &;
   done
   wait
 }
@@ -34,8 +34,8 @@ cog-up(){
     services=(kafka postgres redis keycloak)
   fi
   for service in "${services[@]}"; do
-    docker-compose -f "$COG_BASE_DIR/tools/$service/docker-compose.yml" pull && \
-      docker-compose -f "$COG_BASE_DIR/tools/$service/docker-compose.yml" up -d &;
+    /usr/bin/docker-compose -f "$COG_BASE_DIR/tools/$service/docker-compose.yml" pull && \
+      /usr/bin/docker-compose -f "$COG_BASE_DIR/tools/$service/docker-compose.yml" up -d &;
   done
   wait
 }

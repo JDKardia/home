@@ -12,9 +12,8 @@ _fzf_compgen_dir() {
 }
 
 local completions_to_source=(
-  # "/usr/share/doc/fzf/examples/completion.zsh"
-  # "/usr/share/google-cloud-sdk/completion.zsh.inc"
-  # $(ls $HOME/bin/_*)
+  "/usr/share/doc/fzf/examples/completion.zsh"
+  "/usr/share/google-cloud-sdk/completion.zsh.inc"
 )
 #source all necessary file supplements
 for file in $completions_to_source; do
