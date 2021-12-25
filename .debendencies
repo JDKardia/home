@@ -1,5 +1,7 @@
 appimagelauncher
 audacity
+rename
+rlfe
 autoconf
 bat
 bluez
@@ -65,6 +67,7 @@ p7zip-full
 pandoc
 parallel
 pgcli
+pipewire
 pkg-config
 plantuml
 podman

@@ -6,6 +6,9 @@ _fzf_compgen_path() {
   fd --hidden --follow --exclude ".git" . "$1"
 }
 
+# add asdf completion function to fpath
+fpath=(${ASDF_DIR}/completions $fpath)
+
 # Use fd to generate the list for directory completion
 _fzf_compgen_dir() {
   fd --type d --hidden --follow --exclude ".git" . "$1"
@@ -15,6 +18,7 @@ local completions_to_source=(
   "/usr/share/doc/fzf/examples/completion.zsh"
   "/usr/share/google-cloud-sdk/completion.zsh.inc"
 )
+
 #source all necessary file supplements
 for file in $completions_to_source; do
   if [ -f $file ]; then
