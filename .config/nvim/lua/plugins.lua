@@ -1,12 +1,8 @@
-local install_path = vim.fn.stdpath('data')
-  .. '/site/pack/packer/start/packer.nvim'
+local install_path = vim.fn.stdpath('data') ..
+                       '/site/pack/packer/start/packer.nvim'
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   packer_bootstrap = vim.fn.system({
-    'git',
-    'clone',
-    '--depth',
-    '1',
-    'https://github.com/wbthomason/packer.nvim',
+    'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim',
     install_path,
   })
 end
@@ -16,132 +12,134 @@ vim.cmd([[
   augroup packer_user_config
     autocmd!
     autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+    autocmd BufWritePost config/*.lua source <afile> | PackerCompile
   augroup end
 ]])
 
 return require('packer').startup({
   function(use)
-    use({ 'wbthomason/packer.nvim' }) -- manage ourself
+    use {'wbthomason/packer.nvim'} -- manage ourself
 
-    -- lua native plugins
-    use({ -- love my themes
-      'ellisonleao/gruvbox.nvim',
-      requires = { 'rktjmp/lush.nvim' },
-      config = function()
+    -- rocks I use
+    use_rocks {'fun', 'inspect'}
+
+    ----------------
+    -- Aesthetics --
+    ----------------
+    use { -- love my themes
+      'ellisonleao/gruvbox.nvim', -- the original
+      --    'mhdahmad/gruvbox.nvim', -- minus lush
+      requires={'rktjmp/lush.nvim'},
+      config=function()
         vim.o.termguicolors = true
         vim.o.background = 'dark'
         vim.g.gruvbox_contrast_dark = 'hard'
         vim.cmd('colorscheme gruvbox')
       end,
-    })
-
-    use({
-      'ms-jpq/coq_nvim',
-      branch = 'coq',
-      event = 'VimEnter',
-      config = function()
-        vim.cmd('COQnow --shut-up ')
-      end,
-    })
-    use('williamboman/nvim-lsp-installer')
-    use('ray-x/lsp_signature.nvim')
-    use({
-      'neovim/nvim-lspconfig',
-      after = {
-        'nvim-lsp-installer',
-        'coq_nvim',
-        'lsp_signature.nvim',
-      },
-      config = function()
-        -- stylua: ignore start
-        local my_servers = {
-          'bashls', 'clangd',   'cmake',
-          'cssls',  'dockerls', 'dotls',
-          'eslint', 'elixirls', 'html',
-          'jsonls', 'pyright',  'sumneko_lua',
-          'sqlls',  'tsserver', 'vimls',
-          'yamlls', 'zls',
-        }
-        -- stylua: ignore end
-        local lsp_installer = require('nvim-lsp-installer')
-        local coq = require('coq')
-        require('config.lsp').config(lsp_installer,coq,my_servers)
-      end,
-    })
-
-    use({ -- for filling in the gaps where other servers drop the ball
-    "jose-elias-alvarez/null-ls.nvim",
-    -- config = function()
-    --     require("null-ls").setup()
-    -- end,
-    requires = { "nvim-lua/plenary.nvim" },
-})
-
-    -- 9000+ Snippets
-    use({ 'ms-jpq/coq.artifacts', branch = 'artifacts' })
-    -- lua & third party sources -- See https://github.com/ms-jpq/coq.thirdparty
-    -- Need to **configure separately**
-    use({ 'ms-jpq/coq.thirdparty', branch = '3p' ,config=function() 
-require("coq_3p") {
-  { src = "nvimlua", short_name = "nLUA" }}
-    end})
-
-    use({
+    }
+    use 'p00f/nvim-ts-rainbow'
+    use {
       'nvim-treesitter/nvim-treesitter',
-      run = ':TSUpdate',
-      config = function()
+      run=':TSUpdate',
+      config=function()
         require('nvim-treesitter.configs').setup({
-          -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-          ensure_installed = 'all',
-          highlight = {
-            enable = true,
-            disable = { 'scala', 'jsonc', 'fusion', 'jsonc' },
-          },
-          rainbow = {
-            enable = true,
-            extended_mode = true,
-            max_file_lines = 2000,
-          },
-          playground = { enable = true },
+          -- one of "all", "maintained", or a list of languages
+          ensure_installed='all',
+          highlight={enable=true, disable={'scala', 'jsonc', 'fusion', 'jsonc'}},
+          rainbow={enable=true, extended_mode=true, max_file_lines=2000},
+          playground={enable=true},
         })
       end,
-    })
+    }
 
-    use({
-      'nvim-telescope/telescope.nvim',
-      requires = { 'nvim-lua/plenary.nvim' },
-      config = function() end
-    })
-    use('nvim-lua/popup.nvim')
-    -- use 'p00f/nvim-ts-rainbow'
-        use {"lukas-reineke/indent-blankline.nvim", config=function() end}
+    use {
+      'lukas-reineke/indent-blankline.nvim',
+      config=function()
+        require('indent_blankline').setup({
+          space_char_blankline=' ',
+          show_current_context=true,
+          show_current_context_start=true,
+        })
+      end,
+    }
+    use {
+      'lewis6991/gitsigns.nvim',
+      requires={'nvim-lua/plenary.nvim'},
+      config=function()
+        require('gitsigns').setup({current_line_blame=true})
+      end,
+    }
 
-    -- vim native plugins
-    use({
+    ----------------
+    -- Completion --
+    ----------------
+    use { -- crazy fast completion
+      'ms-jpq/coq_nvim',
+      branch='coq',
+      event='VimEnter',
+      config=function() vim.cmd('COQnow --shut-up ') end,
+    }
+    use {'ms-jpq/coq.artifacts', branch='artifacts'} -- 9000+ Snippets
+    use { -- lua & third party sources -- See github
+      'ms-jpq/coq.thirdparty',
+      branch='3p',
+      config=function()
+        require('coq_3p')({{src='nvimlua', short_name='nLUA'}})
+      end,
+    }
+    use 'williamboman/nvim-lsp-installer' -- automatically handle installation
+    use 'ray-x/lsp_signature.nvim' -- provides a signature box for lsp
+    use { -- the actual lsp config stuff
+      'neovim/nvim-lspconfig',
+      after={'nvim-lsp-installer', 'coq_nvim', 'lsp_signature.nvim'},
+      config=function() require('config.lsp') end,
+    }
+    use { -- for filling in the gaps where other servers drop the ball
+      'jose-elias-alvarez/null-ls.nvim',
+      requires={'nvim-lua/plenary.nvim'},
+      config=function() require('config.null-ls') end,
+    }
+
+    -----------------
+    -- Cleanliness --
+    -----------------
+    use {'McAuleyPenney/tidy.nvim', event='BufWritePre'}
+    use {
+      'windwp/nvim-autopairs',
+      config=function() require('nvim-autopairs').setup({check_ts=true}) end,
+    }
+    use {
       '907th/vim-auto-save',
-      config = function()
+      config=function()
         vim.g.auto_save = 1
-        vim.g.auto_save_events = { 'CursorHold' }
+        vim.g.auto_save_events = {'CursorHold'}
         vim.g.updatetime = 1000
       end,
-    })
-    use({ 'SirVer/ultisnips', { 'honza/vim-snippets' } })
-    use('mhinz/vim-signify')
-    use('ntpeters/vim-better-whitespace')
-    use('prettier/vim-prettier')
-    use('sbdchd/neoformat')
-    use('tpope/vim-commentary')
-    use('tpope/vim-sensible')
-    use('tpope/vim-surround')
-    -- use 'kovisoft/slimv'
-    use('fladson/vim-kitty')
-    use('ziglang/zig.vim')
+    }
+    use 'tpope/vim-commentary'
+    use 'tpope/vim-surround'
+    use 'tpope/vim-sensible'
 
-    -- Automatically set up your configuration after cloning packer.nvim
-    -- Put this at the end after all plugins
-    if packer_bootstrap then
-      require('packer').sync()
-    end
+    ----------------
+    -- Navigation --
+    ----------------
+    use 'nvim-lua/popup.nvim'
+    use {
+      'nvim-telescope/telescope.nvim',
+      requires={'nvim-lua/plenary.nvim'},
+      config=function()
+        -- SOMETHING HERE SOMEDAY
+      end,
+    }
+
+    ------------------
+    -- File Support --
+    ------------------
+    -- vim native plugins that really don't need replacing
+    use 'fladson/vim-kitty'
+    use 'ziglang/zig.vim'
+
+    if packer_bootstrap then require('packer').sync() end
   end,
-  config = { display = { open_fn = require('packer.util').float } },
+  config={display={open_fn=require('packer.util').float}},
 })

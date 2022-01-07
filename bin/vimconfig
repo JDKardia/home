@@ -2,4 +2,4 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-nvim "$HOME/.config/nvim/init.vim"
+nvim "$HOME/.config/nvim/init.lua" "$HOME/.config/nvim/lua/plugins.lua"

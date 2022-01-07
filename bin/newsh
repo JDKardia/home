@@ -4,7 +4,7 @@ IFS=$'\n\t'
 
 __FILENAME=${1:-"placeholder.sh"}
 
-cat <<EOM >>__FILENAME
+cat <<EOM >>"$__FILENAME"
 #!/usr/bin/env bash
 set -euo pipefail
 IFS=$'\n\t'

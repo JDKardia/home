@@ -22,6 +22,7 @@ alias toupper='tr "[:lower:]" "[:upper:]"'
 alias fd='fdfind --hidden'
 alias emacs='swallow emacs'
 alias demacs='swallow emacs --with-profile doom'
+alias lua='rlfe luajit'
 # Shortcut Aliases
 alias gc="git checkout"
 alias gs="git status"

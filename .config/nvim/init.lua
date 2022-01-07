@@ -1,36 +1,35 @@
-require("plugins")
+require('plugins')
 
 -- sane options
-vim.g.mapleader = ","
-vim.o.relativenumber = true -- Set the perfect line numbers
-vim.o.number = true -- Set the perfect line numbers
-vim.o.mouse = "a" -- enable mouse support in all modes
-vim.o.wildmode = "longest:full,full" -- Enable vim command completion
-vim.o.whichwrap = vim.o.whichwrap .. "<,>,h,l,[,]" -- allow cursor to wrap lines
-vim.o.magic = true -- For regular expressions turn magic on
-vim.o.ignorecase = true -- Ignore case when searching
-vim.o.showmatch = true -- Show matching brackets when indicator is over them
-vim.o.mat = 2 -- tenths of a second to blink when matching brackets
-vim.o.scrolloff = 7 -- Set sane scrolloff
-vim.o.foldmethod = "marker" -- use {{{ to }}} based folding
-vim.o.autoindent = true -- preserve current line's indent
-vim.o.smartindent = true -- smartly add indents when necessary
-vim.o.colorcolumn = 80 -- black formatter recommended line length
-vim.o.expandtab = true -- Use spaces instead of tabs
-vim.o.shiftwidth = 2 -- 1 tab == 2 spaces
-vim.o.tabstop = 2 -- 1 tab == 2 spaces
-vim.o.ffs = "unix,dos,mac" -- Use Unix as the standard file type
-vim.o.encoding = "utf8" -- cuz duh
-vim.o.timeoutlen = 500 -- ms to wait for a mapped sequence to complete.
-vim.o.errorbells = false -- disable errorbells
-vim.o.visualbell = false -- disable visual flash from bell
-vim.o.nrformats = "bin,hex,alpha" -- allows <CTRL+A> to increment alpha characters too.
+vim.g.mapleader = ','
+vim.o.relativenumber = true -- the perfect line numbers
+vim.o.number = true ---------- the perfect line numbers
+vim.o.scrolloff = 7 ---------- sane scrolloff
+vim.o.foldmethod = 'marker' -- use {{{ to }}} for folding
+vim.o.autoindent = true ------ preserve current line's indent
+vim.o.smartindent = true ----- smartly add indents when necessary
+vim.o.colorcolumn = 80 ------- solid healthy line length
+vim.o.expandtab = true ------- Use spaces instead of tabs
+vim.o.shiftwidth = 2 --------- 1 tab == 2 spaces
+vim.o.tabstop = 2 ------------ 1 tab == 2 spaces
+vim.o.mouse = 'a' ------------ enable mouse support in all modes
+vim.o.magic = true ----------- For regular expressions turn magic on
+vim.o.mat = 2 ---------------- tenths of a second to blink when matching brackets
+vim.o.timeoutlen = 500 ------- ms to wait for a mapped sequence to complete.
+vim.o.ffs = 'unix,dos,mac' --- Use Unix as the standard file type
+vim.o.encoding = 'utf8' ------ cuz duh
+vim.o.errorbells = false ----- disable errorbells
+vim.o.visualbell = false ----- disable visual flash from bell
+vim.o.ignorecase = true ------ Ignore case when searching
+vim.o.showmatch = true ------- Show matching brackets when indicator is over them
+vim.o.wildmode = 'longest:full,full' -- Enable vim command completion
+vim.o.whichwrap = vim.o.whichwrap .. '<,>,h,l,[,]' -- allow cursor to wrap lines
+vim.o.nrformats = 'bin,hex,alpha' -- increment alpha char with <C-A>
 
 -- look for these suffixes when given filename without an extension
-vim.opt.suffixesadd = ".md,.py,.sh,.js"
+vim.opt.suffixesadd = '.md,.py,.sh,.js'
 
 -- keymaps, convert these later once rest is working
-
 vim.cmd([[
 :imap jk <Esc>
 :imap kj <Esc>
@@ -78,15 +77,6 @@ endfunction
 command! NewLog call NewLog()
 nnoremap <leader>n :<C-U>call NewLog()<CR>
 
-"for inserting new time entries in a Captains log
-function! NewTime()
-  let l:date = strftime("%T%z")
-  call append(line('.'),["### " . date,""])
-  normal! 2j
-endfunction
-command! NewTime call NewTime()
-nnoremap <leader>t :<C-U>call NewTime()<CR>
-
 function! NewCheck()
   call append(line('.'),["- [ ]"])
 endfunction
@@ -96,6 +86,7 @@ nnoremap <leader>c :<C-U>call NewCheck()<CR>
 if executable("sql-formatter")
   command! SqlFormat :%!sql-formatter -u | sed 's/ - > / -> /g; s/ \! = / \!= /g; s/ -> > / ->> /g; s/:: /::/g; s/ \#/\#/g'
 endif
+
 " harden shell scripts if available
 if executable("shellharden")
   command! Harden :%!shellharden --transform ''
@@ -103,5 +94,4 @@ endif
 
 " set filetype to scala for .sc files (ammonite scripts)
 au BufRead,BufNewFile *.sc set filetype=scala
-
 ]])
