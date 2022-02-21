@@ -12,6 +12,7 @@ local generate_on_attach = function()
   return function(client, bufnr)
     -- handle formatting
     client.resolved_capabilities.document_formatting = false
+    client.resolved_capabilities.document_range_formatting = false
 
     -- configure signature presence
     require('lsp_signature').on_attach({

@@ -56,3 +56,17 @@ sapt(){
     echo "This system doesn't have 'apt' installed, so we cannot search with it."
   fi
 }
+
+sqlf(){
+sed -E 's/(@|#|\$)/FUCK\1FUCK/g' |
+  sql-formatter -u |
+  sed -zE '
+    s/ - > / -> /g;
+    s/ \! = / \!= /g;
+    s/ -> > / ->> /g;
+    s/:: /::/g;
+    s/FUCK(.)FUCK/\1/g;
+    s/FUCK (.) FUCK/\1/g;
+    s/(\n\s*)(DISTINCT) / \2\1/g;
+    s/ WITH UR/\nWITH UR/g'
+}

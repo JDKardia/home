@@ -82,9 +82,19 @@ function! NewCheck()
 endfunction
 nnoremap <leader>c :<C-U>call NewCheck()<CR>
 
+command! ReloadConfig :so $MYVIMRC
+
 " custom sql formatting, requires sql-formatter to be installed
 if executable("sql-formatter")
-  command! SqlFormat :%!sql-formatter -u | sed 's/ - > / -> /g; s/ \! = / \!= /g; s/ -> > / ->> /g; s/:: /::/g; s/ \#/\#/g'
+  command! SqlFormat :%! sed -E 's/(@|\#|\$)/FUCK\1FUCK/g' |sql-formatter -u | sed -zE '
+     \ s/ - > / -> /g;
+     \ s/ \! = / \!= /g;
+     \ s/ -> > / ->> /g;
+     \ s/:: /::/g;
+     \ s/FUCK(.)FUCK/\1/g;
+     \ s/FUCK (.) FUCK/\1/g;
+     \ s/(\n\s*)(DISTINCT) / \2\1/g;
+     \ s/\sWITH/\nWITH/g'
 endif
 
 " harden shell scripts if available

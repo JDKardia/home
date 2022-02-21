@@ -12,6 +12,6 @@ if [ $# -gt 0 ]; then
     exit 0
   else
     # If the note does NOT exist, lets initialize it.
-    nvim -c "Zet $ENTERED_NAME" -- "$HOME/notes/cognitops/$FILE_NAME.md"
+    nvim -c "$HOME/notes/cognitops/$FILE_NAME.md"
   fi
 fi

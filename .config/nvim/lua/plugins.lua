@@ -1,3 +1,4 @@
+-- normally /home/USER/.local/share/nvim/site/pack/packer/start
 local install_path = vim.fn.stdpath('data') ..
                        '/site/pack/packer/start/packer.nvim'
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
@@ -77,7 +78,10 @@ return require('packer').startup({
       'ms-jpq/coq_nvim',
       branch='coq',
       event='VimEnter',
-      config=function() vim.cmd('COQnow --shut-up ') end,
+      config=function()
+        vim.g.coq_settings = {keymap={pre_select=true}}
+        vim.cmd('COQnow --shut-up ')
+      end,
     }
     use {'ms-jpq/coq.artifacts', branch='artifacts'} -- 9000+ Snippets
     use { -- lua & third party sources -- See github
@@ -135,9 +139,12 @@ return require('packer').startup({
     ------------------
     -- File Support --
     ------------------
-    -- vim native plugins that really don't need replacing
     use 'fladson/vim-kitty'
     use 'ziglang/zig.vim'
+
+    ----------------------------
+    -- Extended Functionality --
+    ----------------------------
 
     if packer_bootstrap then require('packer').sync() end
   end,

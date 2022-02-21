@@ -83,18 +83,18 @@ set_from_resource $ws12 i3-wm.workspace.12.name "12"
 # workspace 11 output DP-1 DP-3 eDP-1
 # workspace 12 output DP-1 DP-3 eDP-1
 
-workspace 01 output eDP-1-1  HDMI-1  DP-1-0
-workspace 02 output eDP-1-1  HDMI-1  DP-1-0
-workspace 03 output eDP-1-1  HDMI-1  DP-1-0
-workspace 04 output eDP-1-1  HDMI-1  DP-1-0
-workspace 05 output eDP-1-1  HDMI-1  DP-1-0
-workspace 06 output eDP-1-1  HDMI-1  DP-1-0
-workspace 07 output DP-0 DP-1-1 DP-1 HDMI-0
-workspace 08 output DP-0 DP-1-1 DP-1 HDMI-0
-workspace 09 output DP-0 DP-1-1 DP-1 HDMI-0
-workspace 10 output DP-0 DP-1-1 DP-1 HDMI-0
-workspace 11 output DP-0 DP-1-1 DP-1 HDMI-0
-workspace 12 output DP-0 DP-1-1 DP-1 HDMI-0
+workspace 01 output eDP-1-1  HDMI-0  DP-1-0
+workspace 02 output eDP-1-1  HDMI-0  DP-1-0
+workspace 03 output eDP-1-1  HDMI-0  DP-1-0
+workspace 04 output eDP-1-1  HDMI-0  DP-1-0
+workspace 05 output eDP-1-1  HDMI-0  DP-1-0
+workspace 06 output eDP-1-1  HDMI-0  DP-1-0
+workspace 07 output DP-0 DP-1-1 DP-1 HDMI-1
+workspace 08 output DP-0 DP-1-1 DP-1 HDMI-1
+workspace 09 output DP-0 DP-1-1 DP-1 HDMI-1
+workspace 10 output DP-0 DP-1-1 DP-1 HDMI-1
+workspace 11 output DP-0 DP-1-1 DP-1 HDMI-1
+workspace 12 output DP-0 DP-1-1 DP-1 HDMI-1
 # moving workspaces between monitors
 
 
@@ -677,5 +677,3 @@ exec --no-startup-id systemd-run --on-calendar="*-*-* *:*/5:00" --user -- \
     /usr/bin/feh --no-fehbg --bg-scale --randomize -r ~/Pictures/wallpapers
 
 exec --no-startup-id /usr/bin/greenclip daemon
-
-
