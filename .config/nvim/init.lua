@@ -88,6 +88,7 @@ command! ReloadConfig :so $MYVIMRC
 if executable("sql-formatter")
   command! SqlFormat :%! sed -E 's/(@|\#|\$)/FUCK\1FUCK/g' |sql-formatter -u | sed -zE '
      \ s/ - > / -> /g;
+     \ s/ \| \| / || /g;
      \ s/ \! = / \!= /g;
      \ s/ -> > / ->> /g;
      \ s/:: /::/g;

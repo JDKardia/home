@@ -1,4 +1,5 @@
 # Default Arg Aliases
+#
 alias rg='rg -i'
 alias cp="cp -i" # Confirm before overwriting something
 alias rm='rm -i'
@@ -14,7 +15,6 @@ alias icat="kitty +kitten icat"
 alias d="kitty +kitten diff"
 alias pbcopy="xclip -selection clipboard"
 alias pbpaste="xclip -selection clipboard -o"
-alias nb="git checkout -b"
 alias less=$PAGER
 alias bp='bpython'
 alias tolower='tr "[:upper:]" "[:lower:]"'
@@ -24,16 +24,18 @@ alias emacs='swallow emacs'
 alias demacs='swallow emacs --with-profile doom'
 alias lua='rlfe luajit'
 # Shortcut Aliases
-alias gc="git checkout"
-alias gs="git status"
-alias gr="git reset"
+alias g="git"
+alias gs='git status -sb'
 alias k="kubectl"
 alias l='ls -lFh'        #size,show type,human readable
 alias la='ls -lAFh'      #long list,show almost all,show type,human readable
 alias lr='ls -tRFh'      #sorted by date,recursive,show type,human readable
 alias lt='ls -ltFh'      #long list,sorted by date,show type,human readable
 alias ll='ls -l'         #long list
-alias lld='ls -ld -- */' # only dir
+alias lld='ls -ld -- */' # long list only dir
+alias ld='ls -d -- */'   # only dir
+lf(){ls -p "$@" | grep -v '/'} #only file
+
 frg() {
   INITIAL_QUERY=""
   RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
@@ -62,6 +64,7 @@ sed -E 's/(@|#|\$)/FUCK\1FUCK/g' |
   sql-formatter -u |
   sed -zE '
     s/ - > / -> /g;
+    s/ \| \| / || /g;
     s/ \! = / \!= /g;
     s/ -> > / ->> /g;
     s/:: /::/g;

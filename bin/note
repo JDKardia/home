@@ -3,8 +3,9 @@ set -euo pipefail
 IFS=$'\n\t'
 
 if [ $# -gt 0 ]; then
-  ENTERED_NAME="$@"
-  FILE_NAME="$(echo "${ENTERED_NAME%.*}" | tr '[:upper:]' '[:lower:]' | tr ' ' '-')"
+  RAW_NAME="$@"
+  NOTE_NAME=$(echo "${RAW_NAME%.*}" )
+  FILE_NAME="$(echo "$NOTE_NAME" | tr '[:upper:]' '[:lower:]' | tr ' ' '=')"
 
   if [[ -f "$HOME/notes/$FILE_NAME.md" ]]; then
     # If the note exists, lets open it up to edit it
@@ -12,6 +13,13 @@ if [ $# -gt 0 ]; then
     exit 0
   else
     # If the note does NOT exist, lets initialize it.
-    nvim -c "Zet $ENTERED_NAME" -- "$HOME/notes/$FILE_NAME.md"
+    filepath="$HOME/notes/$FILE_NAME.md"
+    ref=$(mktemp)
+    echo "$NOTE_NAME" > "$ref"
+    echo "$NOTE_NAME" | sed 's/./-/g' >> "$ref"
+    cat "$ref" > "$filepath"
+    echo >> "$filepath"
+    echo >> "$filepath"
+    nvim -c '+ normal G' "$filepath" && [ "" == "$(diff "$ref" "$filepath")" ] && rm "$filepath" "$ref"
   fi
 fi

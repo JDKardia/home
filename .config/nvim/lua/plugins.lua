@@ -79,7 +79,10 @@ return require('packer').startup({
       branch='coq',
       event='VimEnter',
       config=function()
-        vim.g.coq_settings = {keymap={pre_select=true}}
+        vim.g.coq_settings = {
+          keymap={pre_select=true},
+          display={ghost_text={enabled=false}},
+        }
         vim.cmd('COQnow --shut-up ')
       end,
     }

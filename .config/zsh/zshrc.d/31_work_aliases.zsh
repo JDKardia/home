@@ -2,8 +2,8 @@
 alias utc-date='date -u +%Y%m%d%H%M'
 alias postgres-proxy-beta="GOOGLE_APPLICATION_CREDENTIALS='' /usr/local/bin/cloud_sql_proxy -instances=beta-243321:us-central1:postgres-beta-1=tcp:2345"
 alias postgres-proxy-prod="GOOGLE_APPLICATION_CREDENTIALS='' /usr/local/bin/cloud_sql_proxy -instances=prod-238418:us-central1:postgres-prod-1=tcp:3456"
-alias kube-proxy-beta='kubectl config use-context gke_beta-243321_us-central1_beta-autopilot-cluster && kubectl proxy'
-alias kube-proxy-prod='kubectl config use-context gke_prod-238418_us-central1-f_prod-kubernetes-cluster-1 && kubectl proxy'
+alias kube-proxy-beta='kubectl config use-context gke_beta-243321_us-central1_cognitops-align-beta && kubectl proxy'
+alias kube-proxy-prod='kubectl config use-context gke_prod-238418_us-central1_cognitops-align-prod && kubectl proxy'
 alias utc-date='date -u +%Y%m%d%H%M'
 
 ## dev env
