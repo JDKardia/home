@@ -9,7 +9,7 @@ alias df='df -h'     # Human-readable sizes
 alias free='free -m' # Show sizes in MB
 alias ls="ls --color=auto"
 alias grep='grep --color'
-alias cat='batcat'
+alias bat='batcat'
 # Make My Own Command Aliases
 alias icat="kitty +kitten icat"
 alias d="kitty +kitten diff"

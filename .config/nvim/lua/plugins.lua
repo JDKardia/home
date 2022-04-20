@@ -80,7 +80,7 @@ return require('packer').startup({
       event='VimEnter',
       config=function()
         vim.g.coq_settings = {
-          keymap={pre_select=true},
+          keymap={pre_select=false},
           display={ghost_text={enabled=false}},
         }
         vim.cmd('COQnow --shut-up ')
@@ -148,6 +148,7 @@ return require('packer').startup({
     ----------------------------
     -- Extended Functionality --
     ----------------------------
+    use 'godlygeek/tabular'
 
     if packer_bootstrap then require('packer').sync() end
   end,

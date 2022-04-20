@@ -78,10 +78,10 @@
   "editor.fontFamily": "FiraCode Nerd Font Mono",
   "editor.fontLigatures": true,
   "editor.fontSize": 14,
-  "editor.formatOnPaste": false,
-  "editor.formatOnSave": false,
-  "editor.formatOnSaveMode": "modifications",
-  "editor.formatOnType": false,
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file",
+  "editor.formatOnType": true,
   "editor.guides.bracketPairs": true,
   "editor.guides.bracketPairsHorizontal": true,
   "editor.insertSpaces": true,
@@ -91,34 +91,22 @@
   "editor.multiCursorModifier": "alt",
   "editor.renderLineHighlight": "all",
   "editor.renderWhitespace": "boundary",
-  "editor.rulers": [
-    88
-  ],
+  "editor.rulers": [88],
   "editor.suggestSelection": "first",
   "editor.tabSize": 2,
   "editor.tokenColorCustomizations": {
     "textMateRules": [
       {
-        "scope": [
-          "comment",
-          "punctuation.definition.comment"
-        ],
+        "scope": ["comment", "punctuation.definition.comment"],
         "settings": {
           "fontStyle": "bold"
         }
       }
     ]
   },
-  "emmet.excludeLanguages": [
-    "markdown",
-    "typescriptreact",
-    "typescript"
-  ],
+  "emmet.excludeLanguages": ["markdown", "typescriptreact", "typescript"],
   "eslint.enable": true,
-  "eslint.validate": [
-    "javascript",
-    "typescript"
-  ],
+  "eslint.validate": ["javascript", "typescript"],
   "explorer.confirmDelete": false,
   "files.associations": {
     "*.txt": "shellscript",
@@ -227,10 +215,7 @@
   "python.languageServer": "Pylance",
   "python.linting.enabled": true,
   "python.linting.flake8Enabled": true,
-  "python.linting.ignorePatterns": [
-    ".vscode/*.py",
-    "**/site-packages/**/*.py"
-  ],
+  "python.linting.ignorePatterns": [".vscode/*.py", "**/site-packages/**/*.py"],
   "python.linting.mypyEnabled": true,
   "python.linting.pylintEnabled": false,
   "search.exclude": {
@@ -242,27 +227,17 @@
   "terminal.external.osxExec": "kitty",
   "vim.insertModeKeyBindings": [
     {
-      "after": [
-        "<Esc>"
-      ],
-      "before": [
-        "j",
-        "k"
-      ]
+      "after": ["<Esc>"],
+      "before": ["j", "k"]
     },
     {
-      "after": [
-        "<Esc>"
-      ],
-      "before": [
-        "k",
-        "j"
-      ]
+      "after": ["<Esc>"],
+      "before": ["k", "j"]
     }
   ],
   // "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
   // "vscode-neovim.neovimInitVimPaths.linux": "/home/kardia/.config/nvim/init.vim",
-  "window.zoomLevel": 1,
+  "window.zoomLevel": 3,
   "workbench.colorCustomizations": {
     "editor.selectionBackground": "#ff00aa3d",
     "editor.selectionHighlightBackground": "#ff00aa3d",
@@ -275,5 +250,8 @@
   "workbench.settings.editor": "json",
   "workbench.settings.enableNaturalLanguageSearch": false,
   "workbench.settings.useSplitJSON": true,
-  "workbench.sideBar.location": "right"
+  "workbench.sideBar.location": "right",
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
