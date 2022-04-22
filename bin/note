@@ -1,25 +1,34 @@
 #!/usr/bin/env bash
 set -euo pipefail
 IFS=$'\n\t'
+access_note() {
+      # If the note exists, lets open it up to edit it
+      nvim "$HOME/notes/$1.md"
+      exit 0
+}
+create_note() {
+      # If the note does NOT exist, lets initialize it.
+      local title=$(echo "$(basename "${1%.*}")" )
+      local filepath="$HOME/notes/$2.md"
+      ref=$(mktemp)
+      echo "$title" > "$ref"
+      echo "$title" | sed 's/./=/g' >> "$ref"
+      cat "$ref" > "$filepath"
+      echo >> "$filepath"
+      echo >> "$filepath"
+      nvim -c '+ normal G' "$filepath" && [ "" == "$(diff "$ref" "$filepath")" ] && rm "$filepath" "$ref"
+}
 
-if [ $# -gt 0 ]; then
-  RAW_NAME="$@"
-  NOTE_NAME=$(echo "${RAW_NAME%.*}" )
-  FILE_NAME="$(echo "$NOTE_NAME" | tr '[:upper:]' '[:lower:]' | tr ' ' '=')"
-
-  if [[ -f "$HOME/notes/$FILE_NAME.md" ]]; then
-    # If the note exists, lets open it up to edit it
-    nvim "$HOME/notes/$FILE_NAME.md"
-    exit 0
-  else
-    # If the note does NOT exist, lets initialize it.
-    filepath="$HOME/notes/$FILE_NAME.md"
-    ref=$(mktemp)
-    echo "$NOTE_NAME" > "$ref"
-    echo "$NOTE_NAME" | sed 's/./-/g' >> "$ref"
-    cat "$ref" > "$filepath"
-    echo >> "$filepath"
-    echo >> "$filepath"
-    nvim -c '+ normal G' "$filepath" && [ "" == "$(diff "$ref" "$filepath")" ] && rm "$filepath" "$ref"
+main() {
+  if [ $# -gt 0 ]; then
+    local raw_name="$@"
+    local file_name="$(echo "${raw_name%.*}" | tr '[:upper:]' '[:lower:]' | tr ' ' '-')"
+    if [[ -f "$HOME/notes/$file_name.md" ]]; then
+      access_note "$file_name"
+    else
+      create_note "$raw_name" "$file_name"
+    fi
   fi
-fi
+}
+
+main "$@"
