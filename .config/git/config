@@ -125,5 +125,3 @@
 	#############
 	behind = !git rev-list --left-only --count $(git bu)...HEAD
 	ahead = !git rev-list --right-only --count $(git bu)...HEAD
-[hub]
-	protocol = ssh

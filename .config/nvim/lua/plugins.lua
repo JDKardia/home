@@ -104,6 +104,7 @@ return require('packer').startup({
     use { -- for filling in the gaps where other servers drop the ball
       'jose-elias-alvarez/null-ls.nvim',
       requires={'nvim-lua/plenary.nvim'},
+      rocks={'fun'},
       config=function() require('config.null-ls') end,
     }
 
@@ -111,10 +112,10 @@ return require('packer').startup({
     -- Cleanliness --
     -----------------
     use {'McAuleyPenney/tidy.nvim', event='BufWritePre'}
-    use {
-      'windwp/nvim-autopairs',
-      config=function() require('nvim-autopairs').setup({check_ts=true}) end,
-    }
+    -- use {
+    --   'windwp/nvim-autopairs',
+    --   config=function() require('nvim-autopairs').setup({check_ts=true}) end,
+    -- }
     use {
       '907th/vim-auto-save',
       config=function()
