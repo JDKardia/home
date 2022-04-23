@@ -22,6 +22,7 @@ vim.o.errorbells = false ----- disable errorbells
 vim.o.visualbell = false ----- disable visual flash from bell
 vim.o.ignorecase = true ------ Ignore case when searching
 vim.o.showmatch = true ------- Show matching brackets when indicator is over them
+vim.o.wildmenu = true -------- enable 'enhanced mode' of command completions
 vim.o.wildmode = 'longest:full,full' -- Enable vim command completion
 vim.o.whichwrap = vim.o.whichwrap .. '<,>,h,l,[,]' -- allow cursor to wrap lines
 vim.o.nrformats = 'bin,hex,alpha' -- increment alpha char with <C-A>

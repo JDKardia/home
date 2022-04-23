@@ -9,7 +9,6 @@ alias df='df -h'     # Human-readable sizes
 alias free='free -m' # Show sizes in MB
 alias ls="ls --color=auto"
 alias grep='grep --color'
-alias cat='batcat'
 # Make My Own Command Aliases
 alias icat="kitty +kitten icat"
 alias d="kitty +kitten diff"
@@ -19,7 +18,7 @@ alias less=$PAGER
 alias bp='bpython'
 alias tolower='tr "[:upper:]" "[:lower:]"'
 alias toupper='tr "[:lower:]" "[:upper:]"'
-alias fd='fdfind --hidden'
+alias fd='fd --hidden'
 alias emacs='swallow emacs'
 alias demacs='swallow emacs --with-profile doom'
 alias lua='rlfe luajit'

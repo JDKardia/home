@@ -1,6 +1,6 @@
 PZ_PLUGIN_HOME="$HOME/.config/zsh/plugins"
 [[ -d $PZ_PLUGIN_HOME/pz ]] ||
-  git clone https://github.com/mattmc3/pz.git $PZ_PLUGIN_HOME/pz
+  git clone https://github.com/mattmc3/pz.git $PZ_PLUGIN_HOME/pz --branch pz
 source $PZ_PLUGIN_HOME/pz/pz.zsh
 
 export ASDF_DIR="$PZ_PLUGIN_HOME/.asdf"
@@ -14,7 +14,6 @@ pz source romkatv/zsh-defer
 pz source romkatv/powerlevel10k
 pz source zsh-users/zsh-history-substring-search
 pz source caarlos0/ports
-pz source lukechilds/zsh-better-npm-completion
 pz source softmoth/zsh-vim-mode
 pz source ohmyzsh/ohmyzsh plugins/docker-compose
 pz source ohmyzsh/ohmyzsh plugins/vi-mode
