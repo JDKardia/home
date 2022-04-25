@@ -1,6 +1,8 @@
+#!/usr/bin/env zsh
+
 # Print a greeting message when shell is started
-echo $USER@$HOST $(uname -srm)
-export PATH=~/bin:$PATH:/home/kardia/.local/share/coursier/bin
+echo "$USER@$HOST" "$(uname -srm)"
+export PATH=~/bin:$PATH
 export FPATH=~/completions:$FPATH
 export VISUAL=$(which nvim)
 export FORCE_COLOR=true # for yarn workspace colors

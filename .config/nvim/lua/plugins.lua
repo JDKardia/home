@@ -70,6 +70,7 @@ return require('packer').startup({
         require('gitsigns').setup({current_line_blame=true})
       end,
     }
+    use 'chrisbra/colorizer'
 
     ----------------
     -- Completion --
@@ -149,6 +150,7 @@ return require('packer').startup({
     ----------------------------
     -- Extended Functionality --
     ----------------------------
+    use 'godlygeek/tabular'
 
     if packer_bootstrap then require('packer').sync() end
   end,
