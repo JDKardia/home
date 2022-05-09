@@ -25,7 +25,7 @@ return require('packer').startup({
     use_rocks {'fun', 'inspect'}
 
     ----------------
-    -- Aesthetics --
+    -- Theming --
     ----------------
     use { -- love my themes
       'ellisonleao/gruvbox.nvim', -- the original
@@ -38,7 +38,12 @@ return require('packer').startup({
         vim.cmd('colorscheme gruvbox')
       end,
     }
+    -------------------
+    -- Code Context  --
+    -------------------
+
     use 'p00f/nvim-ts-rainbow'
+
     use {
       'nvim-treesitter/nvim-treesitter',
       run=':TSUpdate',
@@ -80,10 +85,7 @@ return require('packer').startup({
       branch='coq',
       event='VimEnter',
       config=function()
-        vim.g.coq_settings = {
-          keymap={pre_select=true},
-          display={ghost_text={enabled=false}},
-        }
+        vim.g.coq_settings = {display={ghost_text={enabled=false}}}
         vim.cmd('COQnow --shut-up ')
       end,
     }
@@ -108,15 +110,11 @@ return require('packer').startup({
       rocks={'fun'},
       config=function() require('config.null-ls') end,
     }
+    use 'windwp/nvim-autopairs'
 
     -----------------
     -- Cleanliness --
     -----------------
-    use {'McAuleyPenney/tidy.nvim', event='BufWritePre'}
-    -- use {
-    --   'windwp/nvim-autopairs',
-    --   config=function() require('nvim-autopairs').setup({check_ts=true}) end,
-    -- }
     use {
       '907th/vim-auto-save',
       config=function()
@@ -128,6 +126,7 @@ return require('packer').startup({
     use 'tpope/vim-commentary'
     use 'tpope/vim-surround'
     use 'tpope/vim-sensible'
+    use 'ntpeters/vim-better-whitespace'
 
     ----------------
     -- Navigation --
@@ -151,6 +150,14 @@ return require('packer').startup({
     -- Extended Functionality --
     ----------------------------
     use 'godlygeek/tabular'
+    use {
+      'dkarter/bullets.vim',
+      config=function()
+        vim.g.bullets_enabled_file_types = {
+          'markdown', 'text', 'gitcommit', 'scratch',
+        }
+      end,
+    }
 
     if packer_bootstrap then require('packer').sync() end
   end,

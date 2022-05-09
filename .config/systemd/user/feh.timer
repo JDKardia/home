@@ -1,0 +1,14 @@
+[Unit]
+Description=Periodically change background via feh
+PartOf=graphical-session.target
+After=graphical-session.target
+
+
+[Timer]
+# Start immediately
+OnBootSec=0
+# every 5 minutes
+OnCalendar=*:0/5
+
+[Install]
+WantedBy=timers.target

@@ -2,7 +2,7 @@
 
 # Print a greeting message when shell is started
 echo "$USER@$HOST" "$(uname -srm)"
-export PATH=~/bin:$PATH
+export PATH=~/bin:~/.local/bin:~/.cargo/bin:$PATH
 export FPATH=~/completions:$FPATH
 export VISUAL=$(which nvim)
 export FORCE_COLOR=true # for yarn workspace colors

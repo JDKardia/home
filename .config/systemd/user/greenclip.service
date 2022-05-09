@@ -1,0 +1,15 @@
+[Unit]
+Description=handle spawning of greenclip daemon
+PartOf=graphical-session.target
+
+# will stop trying to restart if this service fails to restart 5 times
+StartLimitIntervalSec=500
+StartLimitBurst=5
+
+[Service]
+Restart=on-failure
+RestartSec=5s
+ExecStart=/usr/bin/greenclip daemon
+
+[Install]
+WantedBy=default.target

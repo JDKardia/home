@@ -1,4 +1,4 @@
-#include "/etc/regolith/styles/gruvbox/root"
+##include "/etc/regolith/styles/gruvbox/root"
 i3-wm.window.border.size: 1
 i3-wm.workspace.01.name: 01
 i3-wm.workspace.02.name: 02
@@ -12,3 +12,4 @@ i3-wm.workspace.09.name: 09
 i3-wm.workspace.10.name: 10
 i3-wm.workspace.11.name: 11
 i3-wm.workspace.12.name: 12
+gnome.wallpaper: 
