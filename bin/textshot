@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+# Dependencies: tesseract-ocr imagemagick scrot xsel
+
+SCR_IMG=~/Pictures/SCREENSHOT_$(date --iso-8601=seconds)
+TMP_IMG="$(mktemp)"
+trap "rm $TMP_IMG*" EXIT
+
+scrot -s $SCR_IMG.png -q 100
+# increase image quality with option -q from default 75 to 100
+
+cp $SCR_IMG.png $TMP_IMG.png
+mogrify -modulate 100,0 -resize 400% $TMP_IMG.png
+#should increase detection rate
+
+tesseract $TMP_IMG.png $TMP_IMG &> /dev/null
+cat $TMP_IMG.txt | xclip -selection clipboard
+
+exit
