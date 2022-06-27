@@ -12,16 +12,16 @@ alias grep='grep --color'
 # Make My Own Command Aliases
 alias icat="kitty +kitten icat"
 alias d="kitty +kitten diff"
-alias pbcopy="xclip -selection clipboard"
-alias pbpaste="xclip -selection clipboard -o"
+#alias pbcopy="xclip -selection clipboard"
+#alias pbpaste="xclip -selection clipboard -o"
 alias less=$PAGER
 alias bp='bpython'
 alias tolower='tr "[:upper:]" "[:lower:]"'
 alias toupper='tr "[:lower:]" "[:upper:]"'
 alias fd='fd --hidden'
-alias emacs='swallow emacs'
-alias demacs='swallow emacs --with-profile doom'
-alias lua='rlwrap luajit'
+#alias emacs='swallow emacs'
+#alias demacs='swallow emacs --with-profile doom'
+#alias lua='rlwrap luajit'
 # Shortcut Aliases
 alias g="git"
 alias gs='git status -sb'
