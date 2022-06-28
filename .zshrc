@@ -12,3 +12,8 @@ local f; for f in ${(o)files}; do
   case ${f:t} in '~'*) continue;; esac
   source "$f"
 done
+
+# >>>> Vagrant command completion (start)
+fpath=(/opt/vagrant/embedded/gems/2.2.19/gems/vagrant-2.2.19/contrib/zsh $fpath)
+compinit
+# <<<<  Vagrant command completion (end)

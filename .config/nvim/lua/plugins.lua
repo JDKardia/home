@@ -1,4 +1,5 @@
--- normally /home/USER/.local/share/nvim/site/pack/packer/start
+--         normally /home/USER/.local/share/nvim/site/pack/packer/start
+-- currently set to /home/USER/.local/share/nvim/site/pack/packer/start
 local install_path = vim.fn.stdpath('data') ..
                        '/site/pack/packer/start/packer.nvim'
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
@@ -42,9 +43,9 @@ return require('packer').startup({
     -- Code Context  --
     -------------------
 
-    use 'p00f/nvim-ts-rainbow'
+    use 'p00f/nvim-ts-rainbow' -- rainbow brackets
 
-    use {
+    use { -- syntax highlighting
       'nvim-treesitter/nvim-treesitter',
       run=':TSUpdate',
       config=function()
@@ -58,7 +59,7 @@ return require('packer').startup({
       end,
     }
 
-    use {
+    use { -- indent indicators
       'lukas-reineke/indent-blankline.nvim',
       config=function()
         require('indent_blankline').setup({
@@ -68,14 +69,14 @@ return require('packer').startup({
         })
       end,
     }
-    use {
+    use { -- sidebar git status indicators
       'lewis6991/gitsigns.nvim',
       requires={'nvim-lua/plenary.nvim'},
       config=function()
         require('gitsigns').setup({current_line_blame=true})
       end,
     }
-    use 'chrisbra/colorizer'
+    use 'chrisbra/colorizer' -- hexcode color highlighter
 
     ----------------
     -- Completion --
@@ -85,7 +86,7 @@ return require('packer').startup({
       branch='coq',
       event='VimEnter',
       config=function()
-        vim.g.coq_settings = {display={ghost_text={enabled=false}}}
+        vim.g.coq_settings = {display={ghost_text={enabled=false},pum={fast_close=false}}}
         vim.cmd('COQnow --shut-up ')
       end,
     }

@@ -2,7 +2,11 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-cat <<EOM >>${1:-"placeholder.py"}
+__FILENAME=${1:-"placeholder.py"}
+
+cat <<EOM >>"$__FILENAME"
 #!/usr/bin/env python3
 
 EOM
+
+chmod +x "$__FILENAME"
