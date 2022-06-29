@@ -1,5 +1,5 @@
 #compdef _zshconfig zshconfig
 _zshconfig() {
-  _path_files -W /home/kardia/.config/zsh/zshrc.d
+  _path_files -W ~/.config/zsh/zshrc.d
 }
 compdef _zshconfig zshconfig

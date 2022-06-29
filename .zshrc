@@ -13,7 +13,9 @@ local f; for f in ${(o)files}; do
   source "$f"
 done
 
-# >>>> Vagrant command completion (start)
-fpath=(/opt/vagrant/embedded/gems/2.2.19/gems/vagrant-2.2.19/contrib/zsh $fpath)
-compinit
-# <<<<  Vagrant command completion (end)
+autoload -Uz compinit; compinit
+autoload -Uz bashcompinit; bashcompinit
+source ~/.bash_profile
+source ~/.bashrc
+eval "$(nodenv init -)"
+compdef _git stripe-git=git

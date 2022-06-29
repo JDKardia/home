@@ -2,12 +2,12 @@
 
 # Print a greeting message when shell is started
 echo "$USER@$HOST" "$(uname -srm)"
-export PATH=~/bin:~/.local/bin:~/.cargo/bin:$PATH
+export PATH=~/bin:~/.local/bin:~/.cargo/bin:/opt/homebrew/bin:/usr/local/opt/gnu-sed/libexec/gnubin:$PATH
 export FPATH=~/completions:$FPATH
 export VISUAL=$(which nvim)
 export FORCE_COLOR=true # for yarn workspace colors
 export CLICOLOR=YES
-export PAGER='nvimpager'
+export PAGER='vimpager'
 #export PAGER='less'
 export FZF_COMPLETION_TRIGGER='~~'
 export GOOGLE_APPLICATION_CREDENTIALS='/home/kardia/.gcp/build-240615-afa84fe6be7a.json'

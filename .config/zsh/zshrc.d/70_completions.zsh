@@ -14,9 +14,8 @@ _fzf_compgen_dir() {
   fd --type d --hidden --follow --exclude ".git" . "$1"
 }
 
-local completions_to_source=(
-  "/usr/share/fzf/completion.zsh"
-)
+ local completions_to_source=(
+ )
 
 #source all necessary file supplements
 for file in $completions_to_source; do
@@ -47,5 +46,6 @@ for command in $commands_to_source; do
     zsh-defer source $command_completion_file
   fi
 done
+
 autoload -U compinit
 compinit

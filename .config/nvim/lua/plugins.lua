@@ -22,9 +22,6 @@ return require('packer').startup({
   function(use)
     use {'wbthomason/packer.nvim'} -- manage ourself
 
-    -- rocks I use
-    use_rocks {'fun', 'inspect'}
-
     ----------------
     -- Theming --
     ----------------
@@ -33,10 +30,12 @@ return require('packer').startup({
       --    'mhdahmad/gruvbox.nvim', -- minus lush
       requires={'rktjmp/lush.nvim'},
       config=function()
-        vim.o.termguicolors = true
+        require("gruvbox").setup({
+          contrast = 'hard',
+          inverse = true,
+        })
         vim.o.background = 'dark'
-        vim.g.gruvbox_contrast_dark = 'hard'
-        vim.cmd('colorscheme gruvbox')
+        vim.cmd([[colorscheme gruvbox]])
       end,
     }
     -------------------
@@ -49,13 +48,7 @@ return require('packer').startup({
       'nvim-treesitter/nvim-treesitter',
       run=':TSUpdate',
       config=function()
-        require('nvim-treesitter.configs').setup({
-          -- one of "all", "maintained", or a list of languages
-          ensure_installed='all',
-          highlight={enable=true, disable={'scala', 'jsonc', 'fusion', 'jsonc'}},
-          rainbow={enable=true, extended_mode=true, max_file_lines=2000},
-          playground={enable=true},
-        })
+        require('config.treesitter')
       end,
     }
 
@@ -108,10 +101,14 @@ return require('packer').startup({
     use { -- for filling in the gaps where other servers drop the ball
       'jose-elias-alvarez/null-ls.nvim',
       requires={'nvim-lua/plenary.nvim'},
-      rocks={'fun'},
       config=function() require('config.null-ls') end,
     }
-    use 'windwp/nvim-autopairs'
+    use {
+      'windwp/nvim-autopairs',
+      config=function()
+        require("nvim-autopairs").setup {}
+      end
+    }
 
     -----------------
     -- Cleanliness --
@@ -146,6 +143,12 @@ return require('packer').startup({
     ------------------
     use 'fladson/vim-kitty'
     use 'ziglang/zig.vim'
+    use {
+      'fatih/vim-go',
+      config=function()
+        vim.g.go_fmt_command = "goimports"
+      end
+    }
 
     ----------------------------
     -- Extended Functionality --
