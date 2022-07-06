@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-set -euo pipefail
-IFS=$'\n\t'
-
-emacsclient -t --alternate-editor='' "$HOME/.doom.d/config.el"

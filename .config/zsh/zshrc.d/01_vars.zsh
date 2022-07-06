@@ -2,7 +2,7 @@
 
 # Print a greeting message when shell is started
 echo "$USER@$HOST" "$(uname -srm)"
-export PATH=~/bin:~/.local/bin:~/.cargo/bin:/opt/homebrew/bin:/usr/local/opt/gnu-sed/libexec/gnubin:$PATH
+export PATH=~/bin:~/.local/bin:~/go/bin:~/.cargo/bin:$PATH
 export FPATH=~/completions:$FPATH
 export VISUAL=$(which nvim)
 export FORCE_COLOR=true # for yarn workspace colors
@@ -10,9 +10,7 @@ export CLICOLOR=YES
 export PAGER='vimpager'
 #export PAGER='less'
 export FZF_COMPLETION_TRIGGER='~~'
-export GOOGLE_APPLICATION_CREDENTIALS='/home/kardia/.gcp/build-240615-afa84fe6be7a.json'
 export DOCKERHOST='localhost'
-export SDKMAN_DIR="/home/kardia/.sdkman"
 # Color man pages
 export LESS_TERMCAP_mb=$'\E[01;32m'
 export LESS_TERMCAP_md=$'\E[01;32m'

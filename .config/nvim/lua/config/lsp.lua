@@ -53,7 +53,7 @@ local server_configs = {
 }
 
 local lsp_installer = require('nvim-lsp-installer')
-local coq = require('coq')
+--local coq = require('coq')
 -- See `:help vim.lsp.*` for documentation on any of the below functions
 lsp_installer.on_server_ready(function(server)
     local config = server_configs[server.name] or {}
@@ -62,7 +62,7 @@ lsp_installer.on_server_ready(function(server)
     config.capabilities = vim.lsp.protocol.make_client_capabilities()
   -- This setup function is exactly the same lspconfig's setup function
   -- (:help lspconfig-quickstart)
-  server:setup(coq.lsp_ensure_capabilities(config))
+  --server:setup(coq.lsp_ensure_capabilities(config))
   vim.cmd([[ do User LspAttachBuffers ]])
 end)
 

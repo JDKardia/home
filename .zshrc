@@ -13,9 +13,9 @@ local f; for f in ${(o)files}; do
   source "$f"
 done
 
-autoload -Uz compinit; compinit
-autoload -Uz bashcompinit; bashcompinit
-source ~/.bash_profile
-source ~/.bashrc
-eval "$(nodenv init -)"
-compdef _git stripe-git=git
+# autoload -Uz compinit; compinit
+# autoload -Uz bashcompinit; bashcompinit
+# source ~/.bash_profile
+# source ~/.bashrc
+# eval "$(nodenv init -)"
+# compdef _git stripe-git=git

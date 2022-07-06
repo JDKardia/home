@@ -26,6 +26,7 @@ vim.o.wildmenu = true -------- enable 'enhanced mode' of command completions
 vim.o.wildmode = 'longest:full,full' -- Enable vim command completion
 vim.o.whichwrap = vim.o.whichwrap .. '<,>,h,l,[,]' -- allow cursor to wrap lines
 vim.o.nrformats = 'bin,hex,alpha' -- increment alpha char with <C-A>
+vim.o.completeopt = "menu,menuone,noselect"
 
 -- look for these suffixes when given filename without an extension
 vim.opt.suffixesadd = '.md,.py,.sh,.js'

@@ -4,19 +4,16 @@ IFS=$'\n\t'
 
 #my personal repos to pull
 repos=(
-  home
-  interview_templates
-  interviews
-  genlicense
   akashic
-  scry
-  pshtman
+  genlicense
   git-conceal
-  playground
   home
   much-to-do-about-nothing
   notes
+  playground
   portportport
+  pshtman
+  scry
   testing-examples
   )
 
