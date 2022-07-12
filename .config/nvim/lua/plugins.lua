@@ -21,8 +21,6 @@ vim.cmd([[
 return require('packer').startup({
   function(use)
     use {'wbthomason/packer.nvim'} -- manage ourself
-
-    use_rocks {'luaformatter', server = 'https://luarocks.org/dev'}
     ----------------
     -- Theming --
     ----------------
@@ -75,23 +73,23 @@ return require('packer').startup({
     ----------------
     -- Completion --
     ----------------
-    -- use { -- crazy fast completion
-    --   'ms-jpq/coq_nvim',
-    --   branch='coq',
-    --   event='VimEnter',
-    --   config=function()
-    --     vim.g.coq_settings = {display={ghost_text={enabled=false},pum={fast_close=false}}}
-    --     vim.cmd('COQnow --shut-up ')
-    --   end,
-    -- }
-    -- use {'ms-jpq/coq.artifacts', branch='artifacts'} -- 9000+ Snippets
-    -- use { -- lua & third party sources -- See github
-    --   'ms-jpq/coq.thirdparty',
-    --   branch='3p',
-    --   config=function()
-    --     require('coq_3p')({{src='nvimlua', short_name='nLUA'}})
-    --   end,
-    -- }
+    use { -- crazy fast completion
+      'ms-jpq/coq_nvim',
+      branch='coq',
+      event='VimEnter',
+      config=function()
+        vim.g.coq_settings = {display={ghost_text={enabled=false},pum={fast_close=false}}}
+        vim.cmd('COQnow --shut-up ')
+      end,
+    }
+    use {'ms-jpq/coq.artifacts', branch='artifacts'} -- 9000+ Snippets
+    use { -- lua & third party sources -- See github
+      'ms-jpq/coq.thirdparty',
+      branch='3p',
+      config=function()
+        require('coq_3p')({{src='nvimlua', short_name='nLUA'}})
+      end,
+    }
      -- snippet support 
      -- use {
      --  'hrsh7th/nvim-cmp',
@@ -105,26 +103,28 @@ return require('packer').startup({
     -- }
 
 
-    --use 'williamboman/nvim-lsp-installer' -- automatically handle installation
-    --use 'ray-x/lsp_signature.nvim' -- provides a signature box for lsp
-    use { -- the actual lsp config stuff
-      'neovim/nvim-lspconfig',
-      requires = {
-    'williamboman/nvim-lsp-installer', -- automatically handle installation
+   --  use 'williamboman/nvim-lsp-installer' -- automatically handle installation
+     use 'ray-x/lsp_signature.nvim' -- provides a signature box for lsp
+     use { -- the actual lsp config stuff
+       'neovim/nvim-lspconfig',
+       requires = {
+     'williamboman/nvim-lsp-installer', -- automatically handle installation
+     }
+   }
 
-      {
-      'hrsh7th/nvim-cmp',
-      requires ={
-        {'hrsh7th/cmp-nvim-lsp'},
-        {'hrsh7th/cmp-buffer'},
-        {'hrsh7th/cmp-path'},
-        {'hrsh7th/cmp-cmdline'},
-        {'saadparwaiz1/cmp_luasnip',requires = 'L3MON4D3/LuaSnip'}
-      }
-    }
-      },
-      config=function() require('config.lsp') end,
-    }
+    --   {
+    --   'hrsh7th/nvim-cmp',
+    --   requires ={
+    --     {'hrsh7th/cmp-nvim-lsp'},
+    --     {'hrsh7th/cmp-buffer'},
+    --     {'hrsh7th/cmp-path'},
+    --     {'hrsh7th/cmp-cmdline'},
+    --     {'saadparwaiz1/cmp_luasnip',requires = 'L3MON4D3/LuaSnip'}
+    --   }
+    -- }
+    --   },
+    --   config=function() require('config.lsp') end,
+    -- }
     use { -- for filling in the gaps where other servers drop the ball
       'jose-elias-alvarez/null-ls.nvim',
       requires={'nvim-lua/plenary.nvim'},

@@ -34,6 +34,11 @@
 
 [diff]
   colorMoved=default
+  tool = nvimdiff
+[difftool]
+  prompt = true
+[difftool "nvimdiff"]
+  cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 
 [merge]
   conflictstyle = diff3

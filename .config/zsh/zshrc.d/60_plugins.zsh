@@ -15,13 +15,19 @@ pz source romkatv/powerlevel10k
 pz source zsh-users/zsh-history-substring-search
 pz source caarlos0/ports
 pz source softmoth/zsh-vim-mode
-pz source ohmyzsh/ohmyzsh plugins/docker-compose
-pz source ohmyzsh/ohmyzsh plugins/vi-mode
-pz source ohmyzsh/ohmyzsh plugins/pip
-pz source ohmyzsh/ohmyzsh plugins/systemd
 pz source agkozak/zsh-z
+pz source ohmyzsh/ohmyzsh plugins/vi-mode
 
+zsh-defer pz source ohmyzsh/ohmyzsh plugins/docker-compose
+zsh-defer pz source ohmyzsh/ohmyzsh plugins/pip
 zsh-defer pz source ohmyzsh/ohmyzsh plugins/docker
+zsh-defer pz source ohmyzsh/ohmyzsh plugins/ripgrep
+zsh-defer pz source ohmyzsh/ohmyzsh plugins/brew
+zsh-defer pz source ohmyzsh/ohmyzsh plugins/bazel
+zsh-defer pz source ohmyzsh/ohmyzsh plugins/golang/_golang
+zsh-defer pz source ohmyzsh/ohmyzsh plugins/docker
+zsh-defer pz source ohmyzsh/ohmyzsh plugins/docker
+
 zsh-defer pz source zsh-users/zsh-autosuggestions
 zsh-defer pz source zsh-users/zsh-syntax-highlighting
 if command -v "direnv" > /dev/null 2>&1; then

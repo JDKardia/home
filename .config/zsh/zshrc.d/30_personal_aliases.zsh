@@ -20,6 +20,8 @@ alias bp='bpython'
 alias tolower='tr "[:upper:]" "[:lower:]"'
 alias toupper='tr "[:lower:]" "[:upper:]"'
 alias fd='fd --hidden'
+alias git-root='cd $(git rev-parse --show-toplevel)'
+
 #alias emacs='swallow emacs'
 #alias demacs='swallow emacs --with-profile doom'
 #alias lua='rlwrap luajit'
@@ -34,6 +36,7 @@ alias lt='ls -ltFh'      #long list,sorted by date,show type,human readable
 alias ll='ls -l'         #long list
 alias lld='ls -ld -- */' # long list only dir
 alias ld='ls -d -- */'   # only dir
+alias git-root='cd $(git rev-parse --show-cdup)'
 lf(){ls -p "$@" | grep -v '/'} #only file
 
 frg() {

@@ -1,9 +1,28 @@
 #!/usr/bin/env zsh
-
 # Print a greeting message when shell is started
-echo "$USER@$HOST" "$(uname -srm)"
-export PATH=~/bin:~/.local/bin:~/go/bin:~/.cargo/bin:$PATH
-export FPATH=~/completions:$FPATH
+#echo "$USER@$HOST" "$(uname -srm)"
+#Brew Path Modificcations
+BREW_PATH="/opt/homebrew/bin"
+BREW_PATH="$BREW_PATH:/opt/homebrew/opt/gnu-time/libexec/gnubin"
+BREW_PATH="$BREW_PATH:/opt/homebrew/opt/gnu-sed/libexec/gnubin"
+BREW_PATH="$BREW_PATH:/opt/homebrew/opt/gnu-units/libexec/gnubin"
+BREW_PATH="$BREW_PATH:/opt/homebrew/opt/gnu-tar/libexec/gnubin"
+
+BREW_FPATH="/opt/homebrew/share/zsh/site-functions"
+
+#Personal
+MY_PATH="$HOME/bin"
+MY_PATH="$MYPATH:$HOME/.local/bin"
+MY_PATH="$MYPATH:$HOME/go/bin"
+MY_PATH="$MYPATH:$HOME/.cargo/bin"
+
+MY_FPATH="$HOME/completions"
+
+# Exporting Path Mods
+export PATH="$MY_PATH:$BREW_PATH:$PATH"
+export FPATH="$MY_FPATH:$BREW_FPATH:$FPATH"
+
+export EDITOR=$(which nvim)
 export VISUAL=$(which nvim)
 export FORCE_COLOR=true # for yarn workspace colors
 export CLICOLOR=YES

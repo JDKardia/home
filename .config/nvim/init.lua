@@ -4,6 +4,7 @@ require('plugins')
 vim.g.mapleader = ','
 vim.o.relativenumber = true -- the perfect line numbers
 vim.o.number = true ---------- the perfect line numbers
+--vim.o.noswapfile = true ------ get rid of swapfiles, I use autosave and like to close windows often
 vim.o.scrolloff = 7 ---------- sane scrolloff
 vim.o.foldmethod = 'marker' -- use {{{ to }}} for folding
 vim.o.autoindent = true ------ preserve current line's indent
@@ -33,6 +34,8 @@ vim.opt.suffixesadd = '.md,.py,.sh,.js'
 
 -- keymaps, convert these later once rest is working
 vim.cmd([[
+set noswapfile
+
 :imap jk <Esc>
 :imap kj <Esc>
 
@@ -64,10 +67,9 @@ inoreabbrev .\ λ
 ]])
 -- commands, convert these once all working.
 vim.cmd([[
-let noteroot="/home/kardia/notes"
-
 " Typos suck
 command! Wq wq
+command! WQ wq
 command! Q q
 
 "for inserting new logs into Captains Log
@@ -107,4 +109,10 @@ endif
 
 " set filetype to scala for .sc files (ammonite scripts)
 au BufRead,BufNewFile *.sc set filetype=scala
+
+" Automatically leave insert mode if idle for too long
+au CursorHoldI * stopinsert
+" set 'updatetime' to 15 seconds when in insert mode, preserve old update time
+au InsertEnter * let updaterestore=&updatetime | set updatetime=30000
+au InsertLeave * let &updatetime=updaterestore
 ]])

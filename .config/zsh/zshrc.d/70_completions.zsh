@@ -47,5 +47,12 @@ for command in $commands_to_source; do
   fi
 done
 
-autoload -U compinit
-compinit
+autoload -Uz compinit; 
+compinit;
+autoload -Uz bashcompinit; 
+bashcompinit;
+
+zsh-defer source ~/.bash_profile;
+zsh-defer source ~/.bashrc;
+zsh-defer eval "$(nodenv init -)";
+zsh-defer compdef _git stripe-git=git;
