@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-set -euo pipefail
-IFS=$'\n\t'
-
-if [ -z $@ ]; then
-  nvim "$HOME/.zshrc"
-else
-  nvim "$HOME/.config/zsh/zshrc.d/$1"
-fi

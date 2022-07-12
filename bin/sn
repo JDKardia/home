@@ -2,4 +2,8 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-nvim "$HOME/.config/git/config"
+main(){
+  note "stripe/$1"
+}
+
+main "$@"

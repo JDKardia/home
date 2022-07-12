@@ -11,25 +11,26 @@ source "$ASDF_DIR"/asdf.sh
 export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
 pz source romkatv/zsh-defer
-pz source romkatv/powerlevel10k
+pz prompt romkatv/powerlevel10k
 pz source zsh-users/zsh-history-substring-search
 pz source caarlos0/ports
-pz source softmoth/zsh-vim-mode
 pz source agkozak/zsh-z
 pz source ohmyzsh/ohmyzsh plugins/vi-mode
 
-zsh-defer pz source ohmyzsh/ohmyzsh plugins/docker-compose
-zsh-defer pz source ohmyzsh/ohmyzsh plugins/pip
-zsh-defer pz source ohmyzsh/ohmyzsh plugins/docker
-zsh-defer pz source ohmyzsh/ohmyzsh plugins/ripgrep
-zsh-defer pz source ohmyzsh/ohmyzsh plugins/brew
 zsh-defer pz source ohmyzsh/ohmyzsh plugins/bazel
+zsh-defer pz source ohmyzsh/ohmyzsh plugins/brew
+zsh-defer pz source ohmyzsh/ohmyzsh plugins/docker
+zsh-defer pz source ohmyzsh/ohmyzsh plugins/docker-compose
 zsh-defer pz source ohmyzsh/ohmyzsh plugins/golang/_golang
-zsh-defer pz source ohmyzsh/ohmyzsh plugins/docker
-zsh-defer pz source ohmyzsh/ohmyzsh plugins/docker
+zsh-defer pz source ohmyzsh/ohmyzsh plugins/pip
+zsh-defer pz source ohmyzsh/ohmyzsh plugins/ripgrep
+zsh-defer pz source ohmyzsh/ohmyzsh plugins/rsync
+zsh-defer pz source ohmyzsh/ohmyzsh plugins/sudo
 
 zsh-defer pz source zsh-users/zsh-autosuggestions
 zsh-defer pz source zsh-users/zsh-syntax-highlighting
+zsh-defer pz source softmoth/zsh-vim-mode
+
 if command -v "direnv" > /dev/null 2>&1; then
   zsh-defer eval "$(direnv hook zsh)"
 else

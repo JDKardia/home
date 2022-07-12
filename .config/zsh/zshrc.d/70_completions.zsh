@@ -6,16 +6,18 @@ _fzf_compgen_path() {
   fd --hidden --follow --exclude ".git" . "$1"
 }
 
-# add asdf completion function to fpath
-fpath=(${ASDF_DIR}/completions $fpath)
-
 # Use fd to generate the list for directory completion
 _fzf_compgen_dir() {
   fd --type d --hidden --follow --exclude ".git" . "$1"
 }
 
- local completions_to_source=(
- )
+# add asdf completion function to fpath
+fpath=(${ASDF_DIR}/completions $fpath)
+
+
+
+local completions_to_source=(
+)
 
 #source all necessary file supplements
 for file in $completions_to_source; do
@@ -48,9 +50,9 @@ for command in $commands_to_source; do
 done
 
 autoload -Uz compinit; 
-compinit;
+zsh-defer compinit;
 autoload -Uz bashcompinit; 
-bashcompinit;
+zsh-defer bashcompinit;
 
 zsh-defer source ~/.bash_profile;
 zsh-defer source ~/.bashrc;

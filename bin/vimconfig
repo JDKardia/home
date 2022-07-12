@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-set -euo pipefail
-IFS=$'\n\t'
-
-nvim "$HOME/.config/nvim/init.lua" "$HOME/.config/nvim/lua/plugins.lua"

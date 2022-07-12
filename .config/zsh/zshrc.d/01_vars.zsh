@@ -11,12 +11,12 @@ BREW_PATH="$BREW_PATH:/opt/homebrew/opt/gnu-tar/libexec/gnubin"
 BREW_FPATH="/opt/homebrew/share/zsh/site-functions"
 
 #Personal
-MY_PATH="$HOME/bin"
-MY_PATH="$MYPATH:$HOME/.local/bin"
-MY_PATH="$MYPATH:$HOME/go/bin"
-MY_PATH="$MYPATH:$HOME/.cargo/bin"
+export MY_PATH="$HOME/bin"
+export MY_PATH="$MY_PATH:$HOME/.local/bin"
+export MY_PATH="$MY_PATH:$HOME/go/bin"
+export MY_PATH="$MY_PATH:$HOME/.cargo/bin"
 
-MY_FPATH="$HOME/completions"
+export MY_FPATH="$HOME/completions"
 
 # Exporting Path Mods
 export PATH="$MY_PATH:$BREW_PATH:$PATH"
