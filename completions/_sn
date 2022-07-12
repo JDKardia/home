@@ -1,0 +1,5 @@
+#compdef _sn sn
+_sn() {
+  _path_files -W ~/notes/stripe
+}
+compdef _sn sn
