@@ -2,8 +2,12 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-main(){
-  note "stripe/$1"
-}
+. "$HOME/lib/bash/note"
 
-main "$@"
+pushd "$HOME/notes/stripe/" >/dev/null 2>&1
+
+if [ $# -gt 0 ]; then
+	note::main "$@"
+else
+	"$SHELL"
+fi

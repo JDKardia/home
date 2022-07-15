@@ -48,6 +48,7 @@ for command in $commands_to_source; do
     zsh-defer source $command_completion_file
   fi
 done
+source "$GENERATED_COMPLETIONS_DIR/_fzf.zsh"
 
 autoload -Uz compinit; 
 zsh-defer compinit;

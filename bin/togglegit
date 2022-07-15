@@ -1,11 +1,23 @@
 #!/usr/bin/env bash
-set -euo pipefail
+# no set -e, want to continue if git remote errors
+set -uo pipefail
 IFS=$'\n\t'
 
-if [[ -f "$HOME/.gitignore" ]]; then
-  mv "$HOME/.gitignore" "$HOME/.toggledgitignore"
-  mv "$HOME/.git" "$HOME/.toggledgit"
-elif [[ -f "$HOME/.toggledgitignore" ]]; then
-  mv "$HOME/.toggledgitignore" "$HOME/.gitignore"
-  mv "$HOME/.toggledgit" "$HOME/.git"
-fi
+# Simple state machine, rotating through 1 of 3 states:
+
+enable_repo() {
+	mv "$HOME/.$1-gitignore" "$HOME/.gitignore"
+	mv "$HOME/.$1-git" "$HOME/.git"
+}
+disable_repo() {
+	mv "$HOME/.gitignore" "$HOME/.$1-gitignore"
+	mv "$HOME/.git" "$HOME/.$1-git"
+}
+
+CURRENT_REMOTE="$(git remote -v 2>&1)"
+case "$CURRENT_REMOTE" in
+fatal*) enable_repo personal ;;
+*github*) disable_repo personal && enable_repo work ;;
+*git.corp*) disable_repo work ;;
+*) echo "shouldnt reach" ;;
+esac

@@ -1,5 +1,6 @@
-#compdef _sn sn
-_sn() {
-  _path_files -W ~/notes/stripe
+#compdef sn
+. ~/lib/bash/_note
+_sn(){
+  note::completion "$HOME/notes/stripe"
 }
-compdef _sn sn
+_sn

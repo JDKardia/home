@@ -1,5 +1,6 @@
 #compdef _note note
+. ~/lib/bash/_note
 _note(){
-    _path_files -W ~/notes
+  note::completion "$HOME/notes"
 }
-compdef _note note
+_note

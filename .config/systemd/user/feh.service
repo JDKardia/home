@@ -1,9 +1,0 @@
-[Unit]
-Description=handle setting and randomization of background
-PartOf=graphical-session.target
-
-
-[Service]
-Type=oneshot
-ExecStart=/usr/bin/feh --no-fehbg --bg-scale --randomize -r /home/kardia/Pictures/wallpapers
-

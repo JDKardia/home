@@ -33,17 +33,20 @@
   extendedRegexp = true
 
 [diff]
-  colorMoved=default
-  tool = nvimdiff
+  colorMoved = default
+  tool = vimdiff
+
 [difftool]
-  prompt = true
-[difftool "nvimdiff"]
-  cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+  prompt = false
+	keepBackup = false
+
+[mergetool]
+	keepBackup = false
 
 [merge]
   conflictstyle = diff3
   verbosity = 3
-  mergetool=vim
+	tool = vimdiff
 
 [push]
 	default = current

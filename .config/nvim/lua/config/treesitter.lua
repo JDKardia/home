@@ -20,7 +20,11 @@ return require('nvim-treesitter.configs').setup({
     'todotxt', 'toml', 'tsx', 'turtle', 'typescript', 'vala',
     'verilog', 'vim', 'vue', 'wgsl', 'yaml', 'yang', 'zig'
 },
-  highlight={enable=true, disable={'scala', 'jsonc', 'fusion', 'jsonc'}},
+  highlight={
+    enable=true,
+    disable={'scala', 'jsonc', 'fusion', 'jsonc'},
+    -- additional_vim_regex_highlighting = true, -- DO NOT SET THIS, BREAKS SPELLSITTER
+},
   rainbow={enable=true, extended_mode=true, max_file_lines=2000},
   playground = { enable = true },
 })

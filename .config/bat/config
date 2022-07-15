@@ -1,2 +1,3 @@
 # set theme
 --theme='gruvbox-dark'
+--paging=never

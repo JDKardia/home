@@ -4,6 +4,7 @@
 #Brew Path Modificcations
 BREW_PATH="/opt/homebrew/bin"
 BREW_PATH="$BREW_PATH:/opt/homebrew/opt/gnu-time/libexec/gnubin"
+BREW_PATH="$BREW_PATH:/opt/homebrew/opt/gnu-xargs/libexec/gnubin"
 BREW_PATH="$BREW_PATH:/opt/homebrew/opt/gnu-sed/libexec/gnubin"
 BREW_PATH="$BREW_PATH:/opt/homebrew/opt/gnu-units/libexec/gnubin"
 BREW_PATH="$BREW_PATH:/opt/homebrew/opt/gnu-tar/libexec/gnubin"
@@ -26,8 +27,8 @@ export EDITOR=$(which nvim)
 export VISUAL=$(which nvim)
 export FORCE_COLOR=true # for yarn workspace colors
 export CLICOLOR=YES
-export PAGER='vimpager'
-#export PAGER='less'
+#export PAGER='vimpager'
+export PAGER='less'
 export FZF_COMPLETION_TRIGGER='~~'
 export DOCKERHOST='localhost'
 # Color man pages
