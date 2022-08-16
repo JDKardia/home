@@ -8,7 +8,7 @@ clog() {
 	TODAYS_LOG="$TODAYS_DATE.md"
 	LAST_FILE="$(ls -A | tail -n 1)"
 
-	if [[ "$TODAYS_LOG" != "$LAST_FILE" ]]; then
+	if [[ $TODAYS_LOG != "$LAST_FILE" ]]; then
 		{
 			echo "# Captains Log - $TODAYS_DATE"
 			echo

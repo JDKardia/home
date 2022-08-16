@@ -14,7 +14,7 @@ cp $SCR_IMG.png $TMP_IMG.png
 mogrify -modulate 100,0 -resize 400% $TMP_IMG.png
 #should increase detection rate
 
-tesseract $TMP_IMG.png $TMP_IMG &> /dev/null
+tesseract $TMP_IMG.png $TMP_IMG &>/dev/null
 cat $TMP_IMG.txt | xclip -selection clipboard
 
 exit

@@ -3,7 +3,7 @@ set -euo pipefail
 IFS=$'\n\t'
 
 # errors out if not in git repo, silent if in repo.
-git remote -v > /dev/null
+git remote -v >/dev/null
 
 LINKED_FILE="${1:-}"
 CUR_REPO="$(git remote -v | grep fetch | awk '{print $2}' | cut -d: -f2 | cut -d. -f1)"

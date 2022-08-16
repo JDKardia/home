@@ -16,8 +16,8 @@ disable_repo() {
 
 CURRENT_REMOTE="$(git remote -v 2>&1)"
 case "$CURRENT_REMOTE" in
-fatal*) enable_repo personal ;;
-*github*) disable_repo personal && enable_repo work ;;
-*git.corp*) disable_repo work ;;
-*) echo "shouldnt reach" ;;
+	fatal*) enable_repo personal ;;
+	*github*) disable_repo personal && enable_repo work ;;
+	*git.corp*) disable_repo work ;;
+	*) echo "shouldnt reach" ;;
 esac

@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-
 zsh() {
-	if [[ -z "$@" ]]; then
+	if [[ -z $@ ]]; then
 		nvim "$HOME/.zshrc"
 	else
 		pushd "$HOME/.config/zsh/zshrc.d" >/dev/null 2>&1
@@ -24,7 +23,7 @@ g() {
 
 vim() {
 	pushd "$HOME/.config/nvim" >/dev/null 2>&1
-	if [[ -z "$@" ]]; then
+	if [[ -z $@ ]]; then
 		nvim "init.lua" "lua/plugins.lua"
 	else
 		nvim $@
@@ -52,21 +51,21 @@ yabai() {
 }
 
 main() {
-	if [[ -z "$@" ]]; then
+	if [[ -z $@ ]]; then
 		echo "$USAGE"
 	else
 		case $1 in
-		z | zsh | \
-			g | git | \
-			v | vim | \
-			hs | hammerspoon | \
-			skhd | \
-			yabai)
-			"$@"
-			;;
-		*)
-			echo "could not open config for $1"
-			;;
+			z | zsh | \
+				g | git | \
+				v | vim | \
+				hs | hammerspoon | \
+				skhd | \
+				yabai)
+				"$@"
+				;;
+			*)
+				echo "could not open config for $1"
+				;;
 		esac
 	fi
 }

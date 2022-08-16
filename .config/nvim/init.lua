@@ -1,17 +1,18 @@
 require("plugins")
 
 -- sane options
-vim.g.mapleader = ","
+vim.g.mapleader = " "
 vim.o.relativenumber = true -- the perfect line numbers
 vim.o.number = true ---------- the perfect line numbers
-vim.o.scrolloff = 7 ---------- sane scrolloff
+vim.o.scrolloff = 4 ---------- sane scrolloff
 vim.o.foldmethod = "marker" -- use {{{ to }}} for folding
 vim.o.autoindent = true ------ preserve current line's indent
 vim.o.smartindent = true ----- smartly add indents when necessary
 vim.o.colorcolumn = "80,88,100,120" -- solid healthy line length
-vim.o.expandtab = true ------- Use spaces instead of tabs
-vim.o.shiftwidth = 2 --------- 1 tab == 2 spaces
-vim.o.tabstop = 2 ------------ 1 tab == 2 spaces
+vim.o.expandtab = false ------ Use tabs instead of spaces
+vim.o.shiftwidth = 0 --------- 0 => same shiftwidth as whatever softtabstop is
+vim.o.softtabstop = 2 -------- behave as if 1 tab == 2 spaces
+vim.o.tabstop = 2 ------------ all tabs show as length 2
 vim.o.magic = true ----------- For regular expressions turn magic on
 vim.o.mat = 2 ---------------- tenths of a second to blink when matching brackets
 vim.o.timeoutlen = 300 ------- ms to wait for a mapped sequence to complete.
@@ -36,15 +37,20 @@ vim.opt.suffixesadd = ".md,.py,.sh,.js"
 
 --stuff i haven't converted to lua yet.
 vim.cmd([[
+
+
 inoreabbrev .\ λ
+
 " Automatically leave insert mode if idle for too long
 au CursorHoldI * stopinsert
+
 " set 'updatetime' to 15 seconds when in insert mode, preserve old update time
 au InsertEnter * let updaterestore=&updatetime | set updatetime=30000
 au InsertLeave * let &updatetime=updaterestore
 
 " automatically write if navigate away from buffer and filetype is markdown
 au Filetype markdown set autowriteall
+
 au FileType go setlocal foldmethod=indent
 
 au BufNewFile,BufRead *.bazel   set filetype=bzl
