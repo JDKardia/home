@@ -1,5 +1,0 @@
-#compdef _zshconfig zshconfig
-_zshconfig() {
-  _path_files -W ~/.config/zsh/zshrc.d
-}
-compdef _zshconfig zshconfig

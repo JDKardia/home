@@ -10,7 +10,7 @@
 
 "command! Vimrc :vs $MYVIMRC " open vimrc
 
-" set number      " Set the perfect line numbers
+set nonumber      " Set the perfect line numbers
 "set mouse=a          " enable mouse support in all modes
 "set wildmode=longest:full,full " Enable vim command completion
 "set clipboard=unnamedplus

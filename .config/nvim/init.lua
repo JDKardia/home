@@ -2,8 +2,7 @@ require("plugins")
 
 -- sane options
 vim.g.mapleader = " "
-vim.o.relativenumber = true -- the perfect line numbers
-vim.o.number = true ---------- the perfect line numbers
+vim.o.number = false ---------- the perfect line numbers
 vim.o.scrolloff = 4 ---------- sane scrolloff
 vim.o.foldmethod = "marker" -- use {{{ to }}} for folding
 vim.o.autoindent = true ------ preserve current line's indent

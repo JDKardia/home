@@ -35,7 +35,7 @@ case "$state" in
         _path_files -W "$HOME/.config/git/" && ret=0
         ;;
       (v|vim)
-        _path_files -W "$HOME/.config/nvim" && ret=0
+        _path_files -W "$HOME/.config/nvim/lua" && ret=0
         ;;
       (hs|hammerspoon)
         _path_files -W "$HOME/.hammerspoon/" && ret=0
