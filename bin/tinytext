@@ -127,6 +127,8 @@ def tinytext(big: str) -> str:
 
 def main() -> None:
     print(tinytext(" ".join(sys.argv[1:])))
+	
+	print("warning: this text will not be read aloud correctly by screenreaders")
 
 
 if __name__ == "__main__":
