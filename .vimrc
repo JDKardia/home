@@ -10,7 +10,7 @@
 
 "command! Vimrc :vs $MYVIMRC " open vimrc
 
-set nonumber      " Set the perfect line numbers
+"set nonumber      " Set the perfect line numbers
 "set mouse=a          " enable mouse support in all modes
 "set wildmode=longest:full,full " Enable vim command completion
 "set clipboard=unnamedplus
@@ -74,7 +74,7 @@ set nonumber      " Set the perfect line numbers
 "vnoremap <Leader>Y "*y
 "vnoremap <Leader>P "*p
 
-"inoreabbrev .\ λ 
+"inoreabbrev .\ λ
 
 "" note for self, while inserting, ctrl+v then some keyboard input captures
 "" the input, like a ctrl+r or or a carriage return. Lets you make fancy macros

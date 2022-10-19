@@ -16,8 +16,10 @@ end
 vim.cmd([[
   augroup packer_user_config
     autocmd!
-    autocmd BufWritePost *.lua source <afile> | PackerCompile
-    autocmd BufWritePost config/*.lua source <afile> | PackerCompile
+    autocmd BufWritePost !~/.config/nvim/*.lua source <afile> | PackerCompile
+    autocmd BufWritePost !~/.config/nvim/lua/*.lua source <afile> | PackerCompile
+    autocmd BufWritePost !~/.config/nvim/lua/*/*.lua source <afile> | PackerCompile
+    autocmd BufWritePost !~/.config/nvim/lua/*/*/*.lua source <afile> | PackerCompile
   augroup end
 ]])
 
@@ -32,11 +34,17 @@ return require("packer").startup {
 			--    'mhdahmad/gruvbox.nvim', -- minus lush
 			requires = { "rktjmp/lush.nvim" },
 			config = function()
+				-- is changed by an external script, don't rename
+				script_owned_darkmode = true
+				if script_owned_darkmode then
+					vim.o.background = "dark"
+				else
+					vim.o.background = "light"
+				end
 				require("gruvbox").setup {
 					contrast = "hard",
 					inverse = true,
 				}
-				vim.o.background = "dark"
 				vim.cmd([[colorscheme gruvbox]])
 			end,
 		}
@@ -82,7 +90,7 @@ return require("packer").startup {
 			requires = {
 				"neovim/nvim-lspconfig",
 				-- lua lsp config
-				"folke/lua-dev.nvim",
+				"folke/neodev.nvim",
 				-- completion engines
 				"hrsh7th/nvim-cmp",
 				"jose-elias-alvarez/null-ls.nvim",
@@ -129,8 +137,8 @@ return require("packer").startup {
 			requires = "kyazdani42/nvim-web-devicons",
 			config = function()
 				require("trouble").setup {
-					auto_open = true,
-					auto_close = true,
+					auto_open = false,
+					auto_close = false,
 					auto_preview = false
 					-- your configuration comes here
 					-- or leave it empty to use the default settings
@@ -182,11 +190,7 @@ return require("packer").startup {
 			tag = "v2.*",
 			requires = 'kyazdani42/nvim-web-devicons',
 			config = function()
-				require("bufferline").setup {
-					numbers = function(opts)
-						return string.format('%s·%s', opts.raise(opts.id), opts.lower(opts.ordinal))
-					end,
-				}
+				require("bufferline").setup {}
 			end
 		}
 
@@ -237,12 +241,6 @@ return require("packer").startup {
 		----------------------------
 		--tables and alignment
 		use { "godlygeek/tabular" }
-		use {
-			"dhruvasagar/vim-table-mode",
-			config = function()
-				vim.g.table_mode_corner = "|"
-			end,
-		}
 		use { "gpanders/editorconfig.nvim" }
 		if packer_bootstrap then
 			require("packer").sync()

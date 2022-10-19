@@ -2,12 +2,13 @@ require("plugins")
 
 -- sane options
 vim.g.mapleader = " "
-vim.o.number = false ---------- the perfect line numbers
+vim.o.mouse = 'a'
+vim.o.number = false --------- the perfect line numbers, none
 vim.o.scrolloff = 4 ---------- sane scrolloff
 vim.o.foldmethod = "marker" -- use {{{ to }}} for folding
 vim.o.autoindent = true ------ preserve current line's indent
 vim.o.smartindent = true ----- smartly add indents when necessary
-vim.o.colorcolumn = "80,88,100,120" -- solid healthy line length
+vim.o.colorcolumn = "80,88,100" -- solid healthy line lengths
 vim.o.expandtab = false ------ Use tabs instead of spaces
 vim.o.shiftwidth = 0 --------- 0 => same shiftwidth as whatever softtabstop is
 vim.o.softtabstop = 2 -------- behave as if 1 tab == 2 spaces
@@ -29,7 +30,6 @@ vim.o.whichwrap = vim.o.whichwrap .. "<,>,h,l,[,]" -- allow cursor to wrap lines
 vim.o.nrformats = "bin,hex,alpha" -- increment alpha char with <C-A>
 vim.o.completeopt = "menu,menuone,noselect,preview"
 vim.o.swapfile = false
-vim.o.colorcolumn = "80,88,100,120"
 
 -- look for these suffixes when given filename without an extension
 vim.opt.suffixesadd = ".md,.py,.sh,.js"
@@ -37,6 +37,10 @@ vim.opt.suffixesadd = ".md,.py,.sh,.js"
 --stuff i haven't converted to lua yet.
 vim.cmd([[
 
+" harden shell scripts if available
+if executable("shellharden")
+  command! Harden :%!shellharden --transform ''
+endif
 
 inoreabbrev .\ λ
 
@@ -53,5 +57,6 @@ au Filetype markdown set autowriteall
 au FileType go setlocal foldmethod=indent
 
 au BufNewFile,BufRead *.bazel   set filetype=bzl
+au BufNewFile,BufRead *.pp   set filetype=ruby
 
 ]])

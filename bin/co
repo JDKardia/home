@@ -1,72 +1,39 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-zsh() {
-	if [[ -z $@ ]]; then
-		nvim "$HOME/.zshrc"
-	else
-		pushd "$HOME/.config/zsh/zshrc.d" >/dev/null 2>&1
-		nvim $@
-	fi
-}
-z() {
-	zsh "$@"
-}
-
-git() {
-	pushd "$HOME/.config/git/" >/dev/null 2>&1
-	nvim "config"
-}
-g() {
-	git "$@"
-}
-
-vim() {
-	pushd "$HOME/.config/nvim/lua" >/dev/null 2>&1
-	if [[ -z $@ ]]; then
-		nvim "../init.lua" "plugins.lua"
-	else
-		nvim $@
-	fi
-}
-v() {
-	vim "$@"
-}
-
-hammerspoon() {
-	pushd "$HOME/.hammerspoon/" >/dev/null 2>&1
-	nvim "init.lua"
-}
-hs() {
-	hammerspoon "$@"
-}
-
-skhd() {
-	pushd "$HOME/.config/skhd/" >/dev/null 2>&1
-	nvim "skhdrc"
-}
-yabai() {
-	pushd "$HOME/.config/yabai/" >/dev/null 2>&1
-	nvim "yabairc"
-}
-
 main() {
-	if [[ -z $@ ]]; then
+	if [[ -z $* ]]; then
 		echo "$USAGE"
 	else
 		case $1 in
-			z | zsh | \
-				g | git | \
-				v | vim | \
-				hs | hammerspoon | \
-				skhd | \
-				yabai)
-				"$@"
+			z | zsh)
+				pushd "$HOME/.config/zsh/" >/dev/null 2>&1
+				;;
+			g | git)
+				pushd "$HOME/.config/git/" >/dev/null 2>&1
+				;;
+			v | vim)
+				pushd "$HOME/.config/nvim/" >/dev/null 2>&1
+				;;
+			hs | hammerspoon)
+				pushd "$HOME/.hammerspoon/" >/dev/null 2>&1
+				;;
+			skhd)
+				pushd "$HOME/.config/skhd/" >/dev/null 2>&1
+				;;
+			yabai)
+				pushd "$HOME/.config/yabai/" >/dev/null 2>&1
 				;;
 			*)
 				echo "could not open config for $1"
 				;;
 		esac
+		shift 1
+		if [[ -z $* ]]; then
+			exec "$SHELL"
+		else
+			nvim "$@"
+		fi
 	fi
 }
 

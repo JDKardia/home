@@ -11,7 +11,3 @@
 #   case ${f:t} in '~'*) continue;; esac
 #   source "$f"
 # done
-
-# autoload -U +X bashcompinit && bashcompinit
-# complete -C /Users/kardia/stripe/space-commander/bin/commands/sc-complete _sc
-# for cmd in "${HOME}"/stripe/space-commander/bin/*; do complete -C "${HOME}"/stripe/space-commander/bin/commands/sc-complete "$(basename "$cmd")"; done

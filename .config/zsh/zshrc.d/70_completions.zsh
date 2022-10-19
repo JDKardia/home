@@ -12,8 +12,15 @@ _fzf_compgen_dir() {
 }
 
 EXTERNAL_COMPLETIONS="$ZDOTDIR/zshrc.d/external_completions"
-[[ ! -d "$EXTERNAL_COMPLETIONS" ]]          && mkdir -p $EXTERNAL_COMPLETIONS
-[[ "$(command -v kubectl)" ]] && [[ ! -f "$EXTERNAL_COMPLETIONS/_kubectl" ]] && kubectl completion zsh > "$EXTERNAL_COMPLETIONS/_kubectl.zsh"
-[[ "$(command -v pip)" ]] && [[ ! -f "$EXTERNAL_COMPLETIONS/_pip" ]]     && pip completion --zsh >  "$EXTERNAL_COMPLETIONS/_pip.zsh"
-[[ "$(command -v fzf)" ]] && [[ ! -f "$EXTERNAL_COMPLETIONS/_fzf" ]]     && curl "https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh" -o "$EXTERNAL_COMPLETIONS/_fzf.zsh" > /dev/null 2>&1
+# [[ ! -d "$EXTERNAL_COMPLETIONS" ]] && mkdir -p $EXTERNAL_COMPLETIONS
+# [[ "$(command -v kubectl)" ]] && [[ ! -f "$EXTERNAL_COMPLETIONS/_kubectl.zsh" ]] && command kubectl completion zsh > "$EXTERNAL_COMPLETIONS/_kubectl.zsh"
+# [[ "$(command -v kubectl)" ]] && [[ ! -f "$EXTERNAL_COMPLETIONS/_sc-kubectl.zsh" ]] && command kubectl completion zsh > "$EXTERNAL_COMPLETIONS/_sc-kubectl.zsh"
+# [[ "$(command -v pip)" ]] && [[ ! -f "$EXTERNAL_COMPLETIONS/_pip.zsh" ]]     && pip completion --zsh >  "$EXTERNAL_COMPLETIONS/_pip.zsh"
+# [[ "$(command -v fzf)" ]] && [[ ! -f "$EXTERNAL_COMPLETIONS/_fzf.zsh" ]]     && curl "https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh" -o "$EXTERNAL_COMPLETIONS/_fzf.zsh" > /dev/null 2>&1
+[[ ! -d "$EXTERNAL_COMPLETIONS" ]] && echo 'nodir'
+[[ ! -d "$EXTERNAL_COMPLETIONS" ]] && echo 'dir'
+[[ "$(command -v kubectl)" ]] && [[ ! -f "$EXTERNAL_COMPLETIONS/_kubectl.zsh" ]] && echo 'nokube'
+[[ "$(command -v kubectl)" ]] && [[ ! -f "$EXTERNAL_COMPLETIONS/_sc-kubectl.zsh" ]] && echo 'nokubesc'
+[[ "$(command -v pip)" ]] && [[ ! -f "$EXTERNAL_COMPLETIONS/_pip.zsh" ]]     && echo 'nopip'
+[[ "$(command -v fzf)" ]] && [[ ! -f "$EXTERNAL_COMPLETIONS/_fzf.zsh" ]]     && echo 'nofzf'
 
