@@ -1,0 +1,23 @@
+regolith.look: gruvbox-kardia
+
+! -- Styles - Colors
+#include "/home/kardia/.config/regolith/theme/colors"
+
+! -- Styles - Fonts
+#include "/home/kardia/.config/regolith/theme/typeface"
+
+! -- Styles - Theme
+#include "/home/kardia/.config/regolith/theme/theme"
+
+! -- Applications
+! These files map values defined above into specific app settings.
+#include "/home/kardia/.config/regolith/theme/st-term"
+#include "/home/kardia/.config/regolith/theme/i3-wm"
+#include "/home/kardia/.config/regolith/theme/i3xrocks"
+#include "/home/kardia/.config/regolith/theme/rofi"
+#include "/home/kardia/.config/regolith/theme/gnome"
+#include "/etc/regolith/styles/gruvbox/st-term"
+#include "/etc/regolith/styles/gruvbox/i3-wm"
+#include "/etc/regolith/styles/i3xrocks"
+#include "/etc/regolith/styles/rofi"
+#include "/etc/regolith/styles/gnome"

@@ -1,0 +1,17 @@
+St.color0:            color_bg3
+St.color1:            color_red
+St.color2:            color_green
+St.color3:            color_yellow
+St.color4:            color_blue
+St.color5:            color_purple
+St.color6:            color_aqua
+St.color7:            color_fg0
+St.color8:            color_gray
+St.color9:            color_ltred
+St.color10:           color_ltgreen
+St.color11:           color_ltyellow
+St.color12:           color_ltblue
+St.color13:           color_ltpurple
+St.color14:           color_ltaqua
+St.color15:           color_fg3
+St.font:              typeface_terminal
