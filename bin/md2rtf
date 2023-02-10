@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+
+pbpaste |
+	pandoc -f markdown -t HTML |
+	hexdump -ve '1/1 "%.2x"' |
+	xargs printf 'set the clipboard to {text:" ", «class HTML»:«data HTML%s»}' |
+	osascript -

@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+start() {
+	it2profile -s presenting
+	clear
+}
+stop() {
+	it2profile -s OmniTerminal
+}
+"$@"

@@ -1,0 +1,7 @@
+#compdef con
+. "$HOME/lib/bash/notes/_note"
+_con(){
+  note::completion "$HOME/notes/stripe/contribution-log"
+}
+_con
+

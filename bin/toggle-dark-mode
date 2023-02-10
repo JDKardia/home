@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+
+iterm_mode_set() {
+	python -c "
+import iterm2
+import sys
+import asyncio
+
+def fatal(output):
+    print(output)
+    sys.exit()
+
+async def set_prof(partial,preset):
+    # Fetch the full profile and then set the color preset in it.
+    profile = await partial.async_get_full_profile()
+    _= profile is not None or fatal(f'failed to get profile: {profile}')
+    await profile.async_set_color_preset(preset)
+
+async def main(connection):
+    if 'dark' in sys.argv: theme='Gruvbox_Dark_Hard'
+    elif 'light' in sys.argv: theme='Gruvbox_Light_Hard'
+    else: fatal('please pass either dark or light as arguments')
+
+    app =  await iterm2.async_get_app(connection)
+    preset = await iterm2.ColorPreset.async_get(connection, theme)
+    _= preset is not None or fatal(f'failed to get preset: {preset}')
+    # Update the list of all profiles and iterate over them.
+    profiles=await iterm2.PartialProfile.async_query(connection)
+    to_await =[set_prof(partial,preset) for partial in profiles]
+    await asyncio.gather(*to_await)
+
+iterm2.run_until_complete(main)
+" "$@"
+}
+
+nvim_dark_mode() {
+	sed "s/script_owned_darkmode =.*/script_owned_darkmode = $1/g" -i "$HOME/.config/nvim/lua/plugins.lua"
+	nvim --headless +'PackerCompile $HOME/.config/nvim/lua/plugins.lua' +'sleep 1' +q # >/dev/null
+}
+
+if [[ $(uname) == 'Darwin' ]]; then
+	osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to not dark mode'
+	IS_DARK_MODE=$(osascript -e 'tell app "System Events" to tell appearance preferences to copy dark mode to stdout')
+	if [[ $IS_DARK_MODE == 'true' ]]; then
+		iterm_mode_set 'dark' &
+		nvim_dark_mode 'true' &
+	else
+		iterm_mode_set 'light' &
+		nvim_dark_mode 'false' &
+	fi
+
+	wait
+fi

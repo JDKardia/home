@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# stouch -> supertouch, create both directories AND files
+
+supertouch() {
+	declare -x ret
+	ret=0
+
+	for fp in "$@"; do
+		local mError=$(mkdir "$(dirname "$fp")" 2>&1)
+		local tError=$(touch "$fp" 2>&1)
+		if [[ -n $tError   ]]; then
+			echo "$(isotime):$fp:mkdir: $mError"
+			echo "$(isotime):$fp:touch: $tError"
+			ret=1
+		fi
+	done
+
+	return "$ret"
+}
+
+supertouch "$@"
