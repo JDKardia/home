@@ -1,6 +1,7 @@
 local u = require("util")
 local n = require("null-ls")
 local f = require("fun")
+local config_path = vim.fn.stdpath("config")
 
 --------------------------------------------------
 -- null-ls setup
@@ -18,18 +19,26 @@ local sources = f.iter({
 	u.can_exec("prettierd") and n.builtins.formatting.prettierd,
 	u.can_exec("prettier") and n.builtins.formatting.prettier,
 	u.can_exec("sqlfluff") and n.builtins.formatting.sqlfluff,
-	u.can_exec("shfmt") and n.builtins.formatting.shfmt.with({
-		filetypes = { "sh", "zsh", "bash" },
-		extra_args = {
-			"--indent",
-			"0",
-			"--case-indent",
-			"--keep-padding",
-			"--language-dialect",
-			"bash",
-			"--simplify",
-		},
-	}),
+	-- u.can_exec("yamlfmt") and n.builtins.formatting.yamlfmt.with({
+	-- 	filetypes = { "yaml", "yml" },
+	-- 	extra_args = {
+	-- 		"--conf",
+	-- 		config_path .. "/.yamlfmt",
+	-- 	},
+	-- }),
+	u.can_exec("shfmt")
+		and n.builtins.formatting.shfmt.with({
+			filetypes = { "sh", "zsh", "bash" },
+			extra_args = {
+				"--indent",
+				"0",
+				"--case-indent",
+				"--keep-padding",
+				"--language-dialect",
+				"bash",
+				"--simplify",
+			},
+		}),
 	--diagnostics
 	u.can_exec("vale") and n.builtins.diagnostics.vale,
 	u.can_exec("shellcheck") and unpack({

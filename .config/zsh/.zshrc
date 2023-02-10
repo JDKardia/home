@@ -12,3 +12,6 @@ local f; for f in ${(o)files}; do
   source "$f"
 done
 
+
+test -e "${ZDOTDIR}/.iterm2_shell_integration.zsh" && source "${ZDOTDIR}/.iterm2_shell_integration.zsh"
+

@@ -12,11 +12,11 @@ lsgh() {
 }
 
 [[ "$(command -v apt)" ]] && sapt() {
-		local rg_search_string=$(
-			local IFS='|'
-			echo "$*"
-		)
-		apt search "$@" | rg "$rg_search_string" --context 1
+	local rg_search_string=$(
+		local IFS='|'
+		echo "$*"
+	)
+	apt search "$@" | rg "$rg_search_string" --context 1
 }
 
 [[ "$(command -v sql-formatter)" ]] && sqlf() {
@@ -32,4 +32,8 @@ lsgh() {
     s/FUCK (.) FUCK/\1/g;
     s/(\n\s*)(DISTINCT) / \2\1/g;
     s/ WITH UR/\nWITH UR/g'
+}
+
+de-escape() {
+	gsed -r 's/\x1b\[[^@-~]*[@-~]//g'
 }

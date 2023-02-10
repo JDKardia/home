@@ -51,7 +51,7 @@ f.iter({
 	"solargraph",
 	"sqlls",
 	"sumneko_lua",
-	"terraformls",
+	--	"terraformls",
 	"tsserver",
 	"vimls",
 	"yamlls",

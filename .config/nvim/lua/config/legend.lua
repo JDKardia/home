@@ -1,24 +1,30 @@
-local l = require('legendary')
-local w = require('which-key')
-local h = require('legendary.toolbox')
+local l = require("legendary")
+local w = require("which-key")
+local h = require("legendary.toolbox")
 l.setup()
 w.setup({
-	window = { border = "single" }
+	window = { border = "single" },
 })
 local base_keymap = {
 	["<leader>"] = {
 		-- {{{
-		s = { ":source $HOME/.config/nvim/init.lua | source $HOME/.config/nvim/plugin/packer_compiled.lua<CR>",
-			"source vimrc" },
-		m = { h.lazy_required_fn('hop', "hint_words", {}), "move to word in buffer" },
-		n = { function() vim.api.nvim_put({ '## ' .. os.date('%Y-%m-%d') }, 'l', true, true) end,
-			"insert markdown heading with today's date" },
+		s = {
+			":source $HOME/.config/nvim/init.lua | source $HOME/.config/nvim/plugin/packer_compiled.lua<CR>",
+			"source vimrc",
+		},
+		m = { h.lazy_required_fn("hop", "hint_words", {}), "move to word in buffer" },
+		n = {
+			function()
+				vim.api.nvim_put({ "## " .. os.date("%Y-%m-%d") }, "l", true, true)
+			end,
+			"insert markdown heading with today's date",
+		},
 		f = {
 			name = "telescope",
-			f = { require('telescope.builtin').find_files, 'find file' },
-			g = { require('telescope.builtin').live_grep, 'find string' },
-			b = { require('telescope.builtin').buffers, 'find buffer' },
-			h = { require('telescope.builtin').help_tags, 'find help' },
+			f = { require("telescope.builtin").find_files, "find file" },
+			g = { require("telescope.builtin").live_grep, "find string" },
+			b = { require("telescope.builtin").buffers, "find buffer" },
+			h = { require("telescope.builtin").help_tags, "find help" },
 		},
 		x = {
 			name = "trouble",
@@ -32,7 +38,7 @@ local base_keymap = {
 		--buffers
 		b = {
 			name = "buffers",
-			["1"] = { h.lazy_required_fn("bufferline", 'go_to_buffer', 1, true), "go to buffer 1" },
+			["1"] = { h.lazy_required_fn("bufferline", "go_to_buffer", 1, true), "go to buffer 1" },
 			["2"] = { h.lazy_required_fn("bufferline", "go_to_buffer", 2, true), "go to buffer 2" },
 			["3"] = { h.lazy_required_fn("bufferline", "go_to_buffer", 3, true), "go to buffer 3" },
 			["4"] = { h.lazy_required_fn("bufferline", "go_to_buffer", 4, true), "go to buffer 4" },
@@ -51,47 +57,32 @@ local base_keymap = {
 }
 
 local which_keymap = {
-	[''] = base_keymap,
+	[""] = base_keymap,
 	v = base_keymap,
 }
 
-
 w.register(which_keymap, {})
-
 
 local default_opts = { noremap = true, silent = true }
 local non_which_keymaps = {
 	-- My Custom
-	{ "jk", '<esc>', mode = { 'i' }, description = "escape!", opts = default_opts },
-	{ "kj", '<esc>', mode = { 'i' }, description = "escape!", opts = default_opts },
-	{ "<leader>y", '"+y', mode = { 'n', 'v' }, description = "yank into global clipboard", opts = default_opts },
-	{ "<leader>p", '"+p', mode = { 'n', 'v' }, description = "put into global clipboard", opts = default_opts },
-	-- hop
-	-- { 'f',
-	-- 	h.lazy_required_fn('hop', "hint_char1",
-	-- 		{ direction = require 'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true }), mode = { 'n', 'v' },
-	-- 	description = "hop forward to character", opts = default_opts },
-	-- { 'F',
-	-- 	h.lazy_required_fn('hop', "hint_char1",
-	-- 		{ direction = require 'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true }), mode = { 'n', 'v' },
-	-- 	description = "hop backward to character", opts = default_opts },
-	-- { 't',
-	-- 	h.lazy_required_fn('hop', "hint_char1",
-	-- 		{ direction = require 'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 }),
-	-- 	mode = { 'n', 'v' }, description = "hop forward to before character", opts = default_opts },
-	-- { 'T',
-	-- 	h.lazy_required_fn('hop', "hint_char1",
-	-- 		{ direction = require 'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 }),
-	-- 	mode = { 'n', 'v' }, description = "hop backward to after character", opts = default_opts },
-
-	{ '<leader>m', h.lazy_required_fn('hop', "hint_words", {}), mode = { 'n', 'v' }, description = "hop to word in buffer",
-		opts = default_opts },
+	{ "jk", "<esc>", mode = { "i" }, description = "escape!", opts = default_opts },
+	{ "kj", "<esc>", mode = { "i" }, description = "escape!", opts = default_opts },
+	{ "<leader>y", '"+y', mode = { "n", "v" }, description = "yank into global clipboard", opts = default_opts },
+	{ "<leader>p", '"+p', mode = { "n", "v" }, description = "put into global clipboard", opts = default_opts },
+	{
+		"<leader>m",
+		h.lazy_required_fn("hop", "hint_words", {}),
+		mode = { "n", "v" },
+		description = "hop to word in buffer",
+		opts = default_opts,
+	},
 }
 l.keymaps(non_which_keymaps)
 
 local commands = {
-	{ ':Wq', ':wq', description = "aliases for sane exiting when I'm moving too fast" },
-	{ ':WQ', ':wq', description = "aliases for sane exiting when I'm moving too fast" },
-	{ ':Q', ':q', description = "aliases for sane exiting when I'm moving too fast" },
+	{ ":Wq", ":wq", description = "aliases for sane exiting when I'm moving too fast" },
+	{ ":WQ", ":wq", description = "aliases for sane exiting when I'm moving too fast" },
+	{ ":Q", ":q", description = "aliases for sane exiting when I'm moving too fast" },
 }
 l.commands(commands)

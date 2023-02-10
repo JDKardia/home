@@ -3,70 +3,37 @@
 local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 local config_path = vim.fn.stdpath("config")
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-	packer_bootstrap = vim.fn.system {
+	packer_bootstrap = vim.fn.system({
 		"git",
 		"clone",
 		"--depth",
 		"1",
 		"https://github.com/wbthomason/packer.nvim",
 		install_path,
-	}
+	})
 end
 
--- auto compile when I edit my config sources!
--- vim.cmd([[
---   augroup packer_user_config
---     autocmd!
---     autocmd BufWritePost !~/.config/nvim/*.lua source <afile> | PackerCompile
---     autocmd BufWritePost !~/.config/nvim/lua/*.lua source <afile> | PackerCompile
---     autocmd BufWritePost !~/.config/nvim/lua/*/*.lua source <afile> | PackerCompile
---     autocmd BufWritePost !~/.config/nvim/lua/*/*/*.lua source <afile> | PackerCompile
---     autocmd BufWritePost !~/.config/nvim/lua/*/*/*/*.lua source <afile> | PackerCompile
---   augroup end
--- ]])
--- local au_id = vim.api.nvim_create_augroup("recompile_packer_config", { clear = true })
--- vim.api.nvim_create_autocmd("BufWritePost", {
--- 	command = 'sil exe "!open " . shellescape(expand("%:p")) | bd | let &ft=&ft',
--- 	group = au_id
--- })
--- vim.cmd([[
---   augroup packer_user_config
---     autocmd!
---     autocmd BufWritePost !~/.config/nvim/*.lua source <afile> | PackerCompile
---     autocmd BufWritePost !~/.config/nvim/lua/*.lua source <afile> | PackerCompile
---     autocmd BufWritePost !~/.config/nvim/lua/*/*.lua source <afile> | PackerCompile
---     autocmd BufWritePost !~/.config/nvim/lua/*/*/*.lua source <afile> | PackerCompile
---     autocmd BufWritePost !~/.config/nvim/lua/*/*/*/*.lua source <afile> | PackerCompile
---   augroup end
--- ]]), config = function()
--- vim.api.nvim_create_augroup('packer_user_config', { clear = true })
--- vim.api.nvim_create_autocmd('BufWritePost', {
---     group = 'packer_user_config',
---     pattern = 'plugins.lua',
---     command = 'source <afile> | PackerCompile'
--- })
-vim.api.nvim_create_autocmd('BufWritePost', {
+vim.api.nvim_create_autocmd("BufWritePost", {
 	pattern = {
-		config_path .. '/*.lua',
-		config_path .. '/lua/*.lua',
-		config_path .. '/lua/*/*.lua',
-		config_path .. '/lua/*/*/*.lua'
+		config_path .. "/*.lua",
+		config_path .. "/lua/*.lua",
+		config_path .. "/lua/*/*.lua",
+		config_path .. "/lua/*/*/*.lua",
 	},
-	command = 'source <afile> | PackerCompile'
+	command = "source <afile> | PackerCompile",
 	-- callback = function(args)
 	-- 	require('packer').compile(args)
 	-- end
 })
 
-
-return require("packer").startup {
+return require("packer").startup({
 	function(use)
-		use { "wbthomason/packer.nvim" } -- manage ourself
-		use { "tweekmonster/startuptime.vim" } --startup time profiler
+		use({ "wbthomason/packer.nvim" }) -- manage ourself
+		use({ "tweekmonster/startuptime.vim" }) --startup time profiler
 		----------------
 		-- Theming --
 		----------------
-		use { -- love my themes
+		use({ -- love my themes
 			"ellisonleao/gruvbox.nvim", -- the original
 			--    'mhdahmad/gruvbox.nvim', -- minus lush
 			requires = { "rktjmp/lush.nvim" },
@@ -78,51 +45,61 @@ return require("packer").startup {
 				else
 					vim.o.background = "light"
 				end
-				require("gruvbox").setup {
+				require("gruvbox").setup({
 					contrast = "hard",
 					inverse = true,
-				}
+				})
 				vim.cmd([[colorscheme gruvbox]])
 			end,
-		}
+		})
 		---------------------
 		-- Editor Context  --
 		---------------------
 
-		use { "p00f/nvim-ts-rainbow" } -- rainbow brackets
+		use("p00f/nvim-ts-rainbow") -- rainbow brackets
+		use("chrisbra/colorizer") -- hexcode color highlighter
 
-		use { -- syntax highlighting
+		use({ -- syntax highlighting
 			"nvim-treesitter/nvim-treesitter",
 			run = ":TSUpdate",
+			requires = "JoosepAlviste/nvim-ts-context-commentstring",
 			config = function()
 				require("config.treesitter")
 			end,
-		}
+		})
+		use("nvim-treesitter/nvim-treesitter-textobjects")
 
-		use { -- indent indicators
+		use({ "somini/vim-textobj-fold", requires = "kana/vim-textobj-user" })
+
+		use({ -- indent indicators
 			"lukas-reineke/indent-blankline.nvim",
 			config = function()
-				require("indent_blankline").setup {
+				require("indent_blankline").setup({
 					space_char_blankline = " ",
 					show_current_context = true,
 					show_current_context_start = true,
-				}
+				})
 			end,
-		}
-		use { -- sidebar git status indicators
+		})
+		use({ -- sidebar git status indicators
 			"lewis6991/gitsigns.nvim",
 			requires = { "nvim-lua/plenary.nvim" },
 			config = function()
-				require("gitsigns").setup { current_line_blame = true }
+				require("gitsigns").setup({ current_line_blame = true })
 			end,
-		}
-		use { "chrisbra/colorizer" } -- hexcode color highlighter
+		})
 
 		---------------------
 		-- Code Completion --
 		---------------------
+		use({
+			"j-hui/fidget.nvim",
+			config = function()
+				require("fidget").setup({})
+			end,
+		})
 
-		use { -- the actual lsp config stuff
+		use({ -- the actual lsp config stuff
 			"williamboman/nvim-lsp-installer",
 			requires = {
 				"neovim/nvim-lspconfig",
@@ -145,68 +122,89 @@ return require("packer").startup {
 				"mrjones2014/legendary.nvim",
 				"folke/which-key.nvim",
 				-- library for plugins
-				"nvim-lua/plenary.nvim"
+				"nvim-lua/plenary.nvim",
 			},
 			config = function()
-				require('config.legend')
+				require("config.legend")
 				require("luasnip.loaders.from_vscode").lazy_load()
 				require("config.lsp")
 			end,
-		}
+		})
 
-		use {
+		use({ -- auto pair completion
 			"windwp/nvim-autopairs",
 			config = function()
-				require("nvim-autopairs").setup {}
+				require("nvim-autopairs").setup({})
 			end,
-		}
-		use {
+		})
+		use({ -- spellchecker
 			"lewis6991/spellsitter.nvim",
 			config = function()
-				require("spellsitter").setup {
+				require("spellsitter").setup({
 					enable = true,
-				}
+				})
 			end,
-		}
+		})
 
-		use {
+		use({ -- lsp issue pane
 			"folke/trouble.nvim",
 			requires = "kyazdani42/nvim-web-devicons",
 			config = function()
-				require("trouble").setup {
+				require("trouble").setup({
 					auto_open = false,
 					auto_close = false,
-					auto_preview = false
+					auto_preview = false,
 					-- your configuration comes here
 					-- or leave it empty to use the default settings
 					-- refer to the configuration section below
-				}
+				})
 			end,
-		}
+		})
 
 		-----------------
 		-- Cleanliness --
 		-----------------
-		use {
+		use({ -- auto save setup
 			"907th/vim-auto-save",
 			config = function()
 				vim.g.auto_save = 1
 				vim.g.auto_save_events = { "CursorHold" }
 				vim.g.updatetime = 1000
 			end,
-		}
-		use { "tpope/vim-commentary" }
-		use { "tpope/vim-surround" }
-		use { "tpope/vim-sensible" }
-		use { "ntpeters/vim-better-whitespace", config = function()
-			vim.g.better_whitespace_operator = '_s'
-		end }
+		})
+		-- use({ "tpope/vim-commentary" }) --commenting commands
+		--
+		use({
+			"numToStr/Comment.nvim",
+			after = "nvim-ts-context-commentstring",
+			config = function()
+				require("Comment").setup({
+					pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
+				})
+			end,
+		})
+
+		use({ -- surround commands
+			"kylechui/nvim-surround",
+			tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+			after = { "vim-textobj-fold" },
+			config = function()
+				require("config.surround")
+			end,
+		})
+		use({ "tpope/vim-sensible" }) --the basics
+		use({ -- commands to manipulate whitespace
+			"ntpeters/vim-better-whitespace",
+			config = function()
+				vim.g.better_whitespace_operator = "_s"
+			end,
+		})
 
 		----------------
 		-- Navigation --
 		----------------
-		use { "nvim-lua/popup.nvim" }
-		use {
+		use({ "nvim-lua/popup.nvim" })
+		use({ -- fzf but neovim
 			"nvim-telescope/telescope.nvim",
 			requires = { "nvim-lua/plenary.nvim" },
 			config = function()
@@ -222,24 +220,25 @@ return require("packer").startup {
 					},
 				})
 			end,
-		}
-		use { 'akinsho/bufferline.nvim',
+		})
+		use({ -- a tab bar of buffers
+			"akinsho/bufferline.nvim",
 			tag = "v2.*",
-			requires = 'kyazdani42/nvim-web-devicons',
+			requires = "kyazdani42/nvim-web-devicons",
 			config = function()
-				require("bufferline").setup {}
-			end
-		}
+				require("bufferline").setup({})
+			end,
+		})
 
-		use {
-			'phaazon/hop.nvim',
-			branch = 'v2', -- optional but strongly recommended
+		use({ -- leap by characters
+			"phaazon/hop.nvim",
+			branch = "v2", -- optional but strongly recommended
 			config = function()
-				require 'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
-			end
-		}
+				require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
+			end,
+		})
 
-		use {
+		use({ -- file tree
 			"nvim-neo-tree/neo-tree.nvim",
 			branch = "v2.x",
 			requires = {
@@ -248,58 +247,86 @@ return require("packer").startup {
 				"MunifTanjim/nui.nvim",
 			},
 			config = function()
-				require('config.neotree')
-			end
-		}
-
+				require("config.neotree")
+			end,
+		})
 
 		------------------
 		-- File Support --
 		------------------
-		use { "fladson/vim-kitty" }
-		use { "ziglang/zig.vim" }
-		use { 'SidOfc/mkdx' }
-		use {
+		-- File types for:
+		use({ "fladson/vim-kitty" }) -- kitty terminal config
+		use({ "ziglang/zig.vim" }) -- zig lang
+		use({ "cappyzawa/starlark.vim" }) -- starlark config lang
+
+		-- Fat Plugins for:
+		use({ --  go lang
 			"fatih/vim-go",
 			config = function()
 				vim.g.go_fmt_command = "goimports"
 				vim.g.go_fmt_autosave = 0
 			end,
-		}
-		use {
+		})
+
+		-- Replace legacy filetype system with a faster one
+		use({
 			"nathom/filetype.nvim",
 			config = function()
-				-- vim.g.did_load_filetypes = 1
-				-- require("filetype").setup({
-				-- 	overrides = {
-				-- 		extensions = {
-				-- 			bazel = "bzl",
-				-- 			pp    = "ruby",
-				-- 			sky   = "starlark",
-				-- 			tf    = "hcl",
-				-- 			hcl    = "tf",
-				-- 		},
-				-- 		function_literal = {
-				-- 			Brewfile = function()
-				-- 				vim.cmd("syntax off")
-				-- 			end,
-				-- 		},
-				-- 	},
-				-- })
-				require('config.filetype')
+				require("config.filetype")
 			end,
-		}
-		use { 'cappyzawa/starlark.vim' }
-
+		})
 		----------------------------
 		-- Extended Functionality --
 		----------------------------
+
 		--tables and alignment
-		use { "godlygeek/tabular" }
-		use { "gpanders/editorconfig.nvim" }
+		use({ "inkarkat/vim-AdvancedSorters", requires = {
+			"inkarkat/vim-ingo-library",
+		} })
+		use({ "godlygeek/tabular" })
+		use({ "gpanders/editorconfig.nvim" })
+
+		use({
+			"Pocco81/true-zen.nvim",
+			config = function()
+				local width = 0
+				require("true-zen").setup({
+					modes = { -- configurations per mode
+						ataraxis = {
+							shade = "dark", -- `dark` then dim the padding windows, otherwise if it's `light` it'll brighten said windows
+							backdrop = 0.10, -- percentage padding windows be dimmed/brightened. ex. 0.10
+							minimum_writing_area = { -- minimum size of main window
+								width = 90,
+								height = 90,
+							},
+							padding = { -- padding windows
+								left = 100,
+								right = 100,
+								top = 0,
+								bottom = 0,
+							},
+							callbacks = { -- run functions when opening/closing Ataraxis mode
+								open_pre = function()
+									vim.o.colorcolumn = "" -- solid healthy line lengths
+									width = vim.o.textwidth
+									vim.o.textwidth = 88
+								end,
+								open_pos = nil,
+								close_pre = nil,
+								close_pos = function()
+									vim.o.colorcolumn = "88,100" -- solid healthy line lengths
+									vim.o.textwidth = width
+								end,
+							},
+						},
+					},
+				})
+			end,
+		})
+
 		if packer_bootstrap then
 			require("packer").sync()
 		end
 	end,
 	config = { display = { open_fn = require("packer.util").float } },
-}
+})
