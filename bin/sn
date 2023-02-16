@@ -2,7 +2,7 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-. "$HOME/lib/bash/notes/note"
+. "$HOME/.local/lib/bash/notes/note"
 
 pushd "$HOME/notes/stripe/" >/dev/null 2>&1
 

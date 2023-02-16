@@ -104,7 +104,7 @@ if [[ -o interactive ]]; then
 
 		iterm2_print_state_data() {
 			local _iterm2_hostname="${iterm2_hostname-}"
-			if [ -z "${iterm2_hostname:-}" ]; then
+			if [ -z "${iterm2_hostname-}" ]; then
 				_iterm2_hostname=$(hostname -f 2>/dev/null)
 			fi
 			printf "\033]1337;RemoteHost=%s@%s\007" "$USER" "${_iterm2_hostname-}"
@@ -275,7 +275,7 @@ if [[ $PATHED != 'TRUE' ]]; then
 	export PATH="$MY_PATH:$MAC_PATH:$PATH"
 	export FPATH="$MY_FPATH:$MAC_FPATH:$FPATH"
 	export MANPATH="$MAC_MANPATH:${MANPATH}"
-	export INFOPATH="$MAC_INFOPATH:${INFOPATH:-}"
+	export INFOPATH="$MAC_INFOPATH:${INFOPATH-}"
 	export PATHED='TRUE'
 fi
 
@@ -377,8 +377,8 @@ export N_PREFIX=$XDG_DATA_HOME/n
 export OPAMROOT="$XDG_DATA_HOME/opam"
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME"/pass
 export PLTUSERHOME="$XDG_DATA_HOME"/racket
-export PYENV_ROOT=$XDG_DATA_HOME/pyenv
-export RBENV_ROOT=XDG_DATA_HOME/rbenv
+export PYENV_ROOT="$XDG_DATA_HOME"/pyenv
+# export RBENV_ROOT="$XDG_DATA_HOME"/rbenv
 export REDISCLI_HISTFILE="$XDG_DATA_HOME"/redis/rediscli_history
 export RLWRAP_HOME="$XDG_DATA_HOME"/rlwrap
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup

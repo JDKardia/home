@@ -1,5 +1,5 @@
 #compdef _note note
-. "$HOME/lib/bash/notes/_note"
+. "$HOME/.local/lib/bash/notes/_note"
 _note(){
   note::completion "$HOME/notes"
 }
