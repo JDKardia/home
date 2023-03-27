@@ -33,6 +33,9 @@ local custom_configs = {
 			},
 		},
 	},
+	jsonnet_ls = {
+		root_dir = lspconfig.util.root_pattern("config.jsonnet", "gmailctl.libsonnet"),
+	},
 }
 -- my servers
 f.iter({
@@ -46,16 +49,18 @@ f.iter({
 	"gopls",
 	"html",
 	"jsonls",
+	"jsonnet_ls",
 	"puppet",
 	"pyright",
 	"solargraph",
 	"sqlls",
-	"sumneko_lua",
-	--	"terraformls",
-	"tsserver",
+	-- "lua_ls",
+	-- "sumneko_lua",
+	-- "terraformls",
+	-- "tsserver",
 	"vimls",
 	"yamlls",
-	"zls",
+	-- "zls",
 }):each(function(srv)
 	lspconfig[srv].setup(custom_configs[srv] or {})
 end)

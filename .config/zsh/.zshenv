@@ -1,24 +1,9 @@
 #!/usr/bin/env zsh
 
-###############
-# XDG Dir Setup
-###############
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_CACHE_HOME="$HOME/.cache"
-export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_STATE_HOME="$HOME/.local/state"
-export XDG_DESKTOP_DIR="$HOME/Desktop"
-export XDG_DOCUMENTS_DIR="$HOME/Documents"
-export XDG_DOWNLOAD_DIR="$HOME/Downloads"
-export XDG_MUSIC_DIR="$HOME/Music"
-export XDG_PICTURES_DIR="$HOME/Pictures"
-export XDG_PUBLICSHARE_DIR="$HOME/Public"
-export XDG_TEMPLATES_DIR="$HOME/Templates"
-export XDG_VIDEOS_DIR="$HOME/Videos"
-
 ################
 # System Context
 ################
+# {{{
 if [[ -f /etc/os-release ]]; then
 	# freedesktop.org and systemd
 	. /etc/os-release
@@ -57,18 +42,7 @@ export IS_LINUX
 export IS_DARWIN
 export IS_UBUNTU
 export IS_ARCH
-
-# editor
-export EDITOR="nvim"
-export VISUAL="nvim"
-
-###################
-# zsh configuration
-###################
-export ZCONFDIR="$XDG_CONFIG_HOME/zsh/zshrc.d"
-export HISTFILE="$ZDOTDIR/.zhistory"    # History filepath
-export HISTSIZE=10000                   # Maximum events for internal history
-export SAVEHIST=10000                   # Maximum events in history file
+# }}}
 
 ##########################
 # iterm2 integration setup
@@ -239,50 +213,32 @@ if [[ -o interactive ]]; then
 fi
 #}}}
 
-###########
-# PATH MODS
-###########
-if [[ $PATHED != 'TRUE' ]]; then
-	# Personal
-	MY_PATH="$HOME/bin"
-	MY_PATH="$MY_PATH:$HOME/.local/bin"
-	MY_PATH="$MY_PATH:$HOME/go/bin"
-	MY_PATH="$MY_PATH:$HOME/.cargo/bin"
-	MY_PATH="$MY_PATH:$HOME/stripe/work/exe"
-	MY_FPATH="$HOME/completions"
-	MY_FPATH="$MY_FPATH:$ZDOTDIR/zshrc.d/external_completions/"
-
-	# Mac Specific
-	BREW_PATH=""
-	BREW_FPATH=""
-
-	if [[ $IS_DARWIN == "true" ]]; then
-		# Brew Path Additions
-		MAC_PATH="/opt/homebrew/bin"
-		MAC_PATH="$MAC_PATH:/opt/homebrew/opt/gnu-time/libexec/gnubin"
-		MAC_PATH="$MAC_PATH:/opt/homebrew/opt/gnu-xargs/libexec/gnubin"
-		MAC_PATH="$MAC_PATH:/opt/homebrew/opt/gnu-sed/libexec/gnubin"
-		MAC_PATH="$MAC_PATH:/opt/homebrew/opt/grep/libexec/gnubin"
-		MAC_PATH="$MAC_PATH:/opt/homebrew/opt/gnu-units/libexec/gnubin"
-		MAC_PATH="$MAC_PATH:/opt/homebrew/opt/gnu-tar/libexec/gnubin"
-		MAC_PATH="$MAC_PATH:$HOME/.config/zsh/iterm2-integrations"
-		MAC_FPATH="/opt/homebrew/share/zsh/site-functions"
-		MAC_MANPATH="/opt/homebrew/share/man"
-		MAC_INFOPATH="/opt/homebrew/share/info"
-	fi
-
-	# Exporting Path Mods
-	export PATH="$MY_PATH:$MAC_PATH:$PATH"
-	export FPATH="$MY_FPATH:$MAC_FPATH:$FPATH"
-	export MANPATH="$MAC_MANPATH:${MANPATH}"
-	export INFOPATH="$MAC_INFOPATH:${INFOPATH-}"
-	export PATHED='TRUE'
-fi
-
+########################################
+# Enable XDG Dir Usage wherever Possible
+########################################
+# {{{
+# XDG Dir Setup
+# {{{
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_DESKTOP_DIR="$HOME/Desktop"
+export XDG_DOCUMENTS_DIR="$HOME/Documents"
+export XDG_DOWNLOAD_DIR="$HOME/Downloads"
+export XDG_MUSIC_DIR="$HOME/Music"
+export XDG_PICTURES_DIR="$HOME/Pictures"
+export XDG_PUBLICSHARE_DIR="$HOME/Public"
+export XDG_TEMPLATES_DIR="$HOME/Templates"
+export XDG_VIDEOS_DIR="$HOME/Videos"
+# }}}
 # set to use XDG dirs
+# {{{
 export GHCUP_USE_XDG_DIRS=true
+# }}}
 
 # set XDG config dir
+# {{{
 export ACKRC="$XDG_CONFIG_HOME/ack/ackrc"
 export ASDF_CONFIG_FILE="${XDG_CONFIG_HOME}/asdf/asdfrc"
 export ASPELL_CONF="per-conf $XDG_CONFIG_HOME/aspell/aspell.conf; personal $XDG_CONFIG_HOME/aspell/en.pws; repl $XDG_CONFIG_HOME/aspell/en.prepl"
@@ -340,17 +296,23 @@ export XINITRC="$XDG_CONFIG_HOME"/X11/xinitrc
 export XSERVERRC="$XDG_CONFIG_HOME"/X11/xserverrc
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
+# }}}
 
 # set XDG state dir
+# {{{
 export HISTFILE="$XDG_STATE_HOME"/bash/history
 export PSQL_HISTORY="$XDG_STATE_HOME/psql_history"
 export TEXMACS_HOME_PATH=$XDG_STATE_HOME/texmacs
+# }}}
 
 # set XDG runtime dir
+# {{{
 export RXVT_SOCKET="$XDG_RUNTIME_DIR"/urxvtd
 export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
+# }}}
 
 # Setting XDG Data dir
+# {{{
 export ASDF_DATA_DIR=${XDG_DATA_HOME}/asdf
 export ATOM_HOME="$XDG_DATA_HOME"/atom
 export AZURE_CONFIG_DIR=$XDG_DATA_HOME/azure
@@ -394,8 +356,10 @@ export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
 export WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
 export WORKON_HOME="$XDG_DATA_HOME/virtualenvs"
 export _Z_DATA="$XDG_DATA_HOME/z"
+# }}}
 
 # set XDG cache dir
+# {{{
 export CALCHISTFILE="$XDG_CACHE_HOME"/calc_history
 export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
 export EM_CACHE="$XDG_CACHE_HOME"/emscripten/cache
@@ -411,3 +375,61 @@ export SOLARGRAPH_CACHE=$XDG_CACHE_HOME/solargraph
 export STARSHIP_CACHE="$XDG_CACHE_HOME"/starship
 export TEXMFVAR=$XDG_CACHE_HOME/texlive/texmf-var
 export XCOMPOSECACHE="$XDG_CACHE_HOME"/X11/xcompose
+# }}}
+# }}}
+
+###########
+# PATH MODS
+###########
+# {{{
+if [[ $PATHED != 'true' ]]; then
+	# Personal
+	MY_PATH="$HOME/bin"
+	MY_PATH="$MY_PATH:$HOME/.local/bin"
+	MY_PATH="$MY_PATH:$GOPATH/bin"
+	MY_PATH="$MY_PATH:$CARGO_HOME/bin"
+	MY_PATH="$MY_PATH:$HOME/stripe/work/exe"
+	MY_FPATH="$HOME/completions"
+	MY_FPATH="$MY_FPATH:$ZDOTDIR/zshrc.d/external_completions/"
+
+	# Mac Specific
+	MAC_PATH=""
+	MAC_FPATH=""
+
+	if [[ $IS_DARWIN == "true" ]]; then
+		# Brew Path Additions
+		MAC_PATH="/opt/homebrew/bin"
+		MAC_PATH="$MAC_PATH:/opt/homebrew/opt/gnu-time/libexec/gnubin"
+		MAC_PATH="$MAC_PATH:/opt/homebrew/opt/gnu-xargs/libexec/gnubin"
+		MAC_PATH="$MAC_PATH:/opt/homebrew/opt/gnu-sed/libexec/gnubin"
+		MAC_PATH="$MAC_PATH:/opt/homebrew/opt/grep/libexec/gnubin"
+		MAC_PATH="$MAC_PATH:/opt/homebrew/opt/gnu-units/libexec/gnubin"
+		MAC_PATH="$MAC_PATH:/opt/homebrew/opt/gnu-tar/libexec/gnubin"
+		MAC_PATH="$MAC_PATH:$HOME/.config/zsh/iterm2-integrations"
+		MAC_FPATH="/opt/homebrew/share/zsh/site-functions"
+		MAC_MANPATH="/opt/homebrew/share/man"
+		MAC_INFOPATH="/opt/homebrew/share/info"
+
+		# Exporting Path Mods
+		export PATH="$MY_PATH:$MAC_PATH:$PATH"
+		export FPATH="$MY_FPATH:$MAC_FPATH:$FPATH"
+		export MANPATH="$MAC_MANPATH:${MANPATH}"
+		export INFOPATH="$MAC_INFOPATH:${INFOPATH-}"
+		export PATHED='true'
+	fi
+fi
+# }}}
+
+###################
+# zsh configuration
+###################
+# {{{
+# zsh itself
+export ZCONFDIR="$XDG_CONFIG_HOME/zsh/zshrc.d"
+export HISTFILE="$ZDOTDIR/.zhistory"    # History filepath
+export HISTSIZE=10000                   # Maximum events for internal history
+export SAVEHIST=10000                   # Maximum events in history file
+# editor
+export EDITOR="nvim"
+export VISUAL="nvim"
+# }}}

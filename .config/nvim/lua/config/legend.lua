@@ -1,10 +1,7 @@
 local l = require("legendary")
 local w = require("which-key")
 local h = require("legendary.toolbox")
-l.setup()
-w.setup({
-	window = { border = "single" },
-})
+local default_opts = { noremap = true, silent = true }
 local base_keymap = {
 	["<leader>"] = {
 		-- {{{
@@ -55,34 +52,33 @@ local base_keymap = {
 		--}}}
 	},
 }
-
-local which_keymap = {
-	[""] = base_keymap,
-	v = base_keymap,
-}
-
-w.register(which_keymap, {})
-
-local default_opts = { noremap = true, silent = true }
-local non_which_keymaps = {
-	-- My Custom
-	{ "jk", "<esc>", mode = { "i" }, description = "escape!", opts = default_opts },
-	{ "kj", "<esc>", mode = { "i" }, description = "escape!", opts = default_opts },
-	{ "<leader>y", '"+y', mode = { "n", "v" }, description = "yank into global clipboard", opts = default_opts },
-	{ "<leader>p", '"+p', mode = { "n", "v" }, description = "put into global clipboard", opts = default_opts },
-	{
-		"<leader>m",
-		h.lazy_required_fn("hop", "hint_words", {}),
-		mode = { "n", "v" },
-		description = "hop to word in buffer",
-		opts = default_opts,
+l.setup({
+	which_key = {
+		mappings = {
+			[""] = base_keymap,
+			v = base_keymap,
+		},
 	},
-}
-l.keymaps(non_which_keymaps)
-
-local commands = {
-	{ ":Wq", ":wq", description = "aliases for sane exiting when I'm moving too fast" },
-	{ ":WQ", ":wq", description = "aliases for sane exiting when I'm moving too fast" },
-	{ ":Q", ":q", description = "aliases for sane exiting when I'm moving too fast" },
-}
-l.commands(commands)
+	keymaps = {
+		-- My Custom
+		{ "jk", "<esc>", mode = { "i" }, description = "escape!", opts = default_opts },
+		{ "kj", "<esc>", mode = { "i" }, description = "escape!", opts = default_opts },
+		{ "<leader>y", '"+y', mode = { "n", "v" }, description = "yank into global clipboard", opts = default_opts },
+		{ "<leader>p", '"+p', mode = { "n", "v" }, description = "put into global clipboard", opts = default_opts },
+		{
+			"<leader>m",
+			h.lazy_required_fn("hop", "hint_words", {}),
+			mode = { "n", "v" },
+			description = "hop to word in buffer",
+			opts = default_opts,
+		},
+	},
+	commands = {
+		{ ":Wq", ":wq", description = "aliases for sane exiting when I'm moving too fast" },
+		{ ":WQ", ":wq", description = "aliases for sane exiting when I'm moving too fast" },
+		{ ":Q", ":q", description = "aliases for sane exiting when I'm moving too fast" },
+	},
+})
+w.setup({
+	window = { border = "single" },
+})

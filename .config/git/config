@@ -3,7 +3,7 @@
 
 [user]
   name = Kardia
-  email = jdkardia@gmail.com
+  email = joe@kardia.codes
   username = JDKardia
 
 [color]
@@ -42,6 +42,7 @@
 
 [push]
 	default = current
+	autoSetupRemote = true
 
 [pull]
 	ff = only

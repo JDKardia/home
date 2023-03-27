@@ -1,23 +1,26 @@
--- Shows a macOS menubar item with how much isoDate I've drank today.
--- Uses my `bin/daily` script to get the values.
+-- Shows a macOS menubar item with the iso date that copies the date into your
+-- clip board when you click the menubar item
+--
+-- uses the date util for date emission
 
-isoDateMenu = hs.menubar.new()
+local isoDateMenu = hs.menubar.new()
 
-local function refreshIsoDateMenu()
-  local task = hs.task.new(
-  '/bin/date',
-    function (_, stdout)
-      date = string.gsub(stdout, "%s$", "") -- strip the \n off the output
-      isoDateMenu:setTitle(date)
-    end,
-    {'+%Y-%m-%d'}
-  )
+local refreshIsoDateMenu = function()
+	local task = hs.task.new("/bin/date", function(_, stdout)
+		date = string.gsub(stdout, "%s$", "") -- strip the \n off the output
+		isoDateMenu:setTitle(date)
+	end, { "+%Y-%m-%d" })
 
-  task:start()
+	task:start()
 end
 
--- Init the menu
+local copyDate = function()
+	hs.pasteboard.setContents(isoDateMenu:title())
+end
+
+-- Init the menubar entry
 isoDateMenu:setTitle("...") -- Loading
+isoDateMenu:setClickCallback(copyDate)
 
 -- Read the first value immediately
 refreshIsoDateMenu()

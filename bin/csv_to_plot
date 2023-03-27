@@ -2,14 +2,14 @@
 set -euo pipefail
 
 CSV=$1
-START_COL=$2
-END_COL=$3
+START_COL=${2:-1}
+END_COL=${3:-2}
 shift 3
-PLOT_TITLE="$*"
+PLOT_TITLE=${*:-testplot}
 PLOT_OUT="$(echo "$PLOT_TITLE" | tr '[:upper:]' '[:lower:]' | sed 's/ /_/g').png"
 
 gnuplot -e "
-set terminal pngcairo size 1024,768 enhanced font 'Rounded Elegance,9';
+set terminal pngcairo size 1920,1080 enhanced font 'Rounded Elegance,9';
 set title '$PLOT_TITLE';
 set output '$PLOT_OUT';
 set style data histogram;

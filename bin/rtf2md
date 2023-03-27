@@ -6,3 +6,4 @@ IFS=$'\n\t'
 osascript -e 'the clipboard as «class HTML»' 2>/dev/null |
 	perl -ne 'print chr foreach unpack("C*",pack("H*",substr($_,11,-3)))' |
 	pandoc --wrap=none -f HTML -t gfm-raw_html | pbcopy
+pbpaste

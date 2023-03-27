@@ -1,18 +1,10 @@
 require("hs.ipc")
 require("config-autoloader")
--- require("isodate")
+require("isodate")
 require("ping")
 -- require("system-state-watcher")
-require("zoommute")
-
+-- require("zoommute")
 stackline = require("stackline")
--- local myStackline = {
--- 	paths = {
--- 		jq = "/opt/homebrew/bin/jq",
--- 		yabai = "/opt/homebrew/bin/yabai"
--- 	}
--- }
-
 stackline:init()
 
 --local rb = hs.loadSpoon("recursiveBinder")
