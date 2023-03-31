@@ -9,5 +9,10 @@ cat <<EOM >>"$__FILENAME"
 set -euo pipefail
 IFS=$'\n\t'
 
+main() {
+	"$@"
+}
+
+main "$@"
 EOM
 chmod +x "$__FILENAME"
